@@ -1,0 +1,156 @@
+/* =========================================== */
+/* 画面全体に設定するスタイル                    */
+/* =========================================== */
+* {
+  /* フォント */
+  font-family: '游ゴシック体', 'Yu Gothic', 'YuGothic', 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', 'Osaka', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+
+  /* 文字を選択させない */
+  user-select: none;
+}
+
+:focus {
+  /* フォーカスの枠線を表示しない */
+  outline: none;
+}
+
+/* =========================================== */
+/* 変数の定義                                   */
+/* =========================================== */
+:root {
+  /* ------------------------------------------- */
+  /* フレームの定義                               */
+  /* ------------------------------------------- */
+
+  /* 各種フレームの枠線 */
+  --kt-frame-border: solid 1px #303030;
+
+  /* フレームの影 */
+  --kt-frame-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+
+  /* ------------------------------------------- */
+  /* 文字色の定義                                 */
+  /* ------------------------------------------- */
+
+  /* タイトルの文字色 */
+  --kt-title-color: #f3f703;
+
+  /* ------------------------------------------- */
+  /* ボタンの定義                                 */
+  /* ------------------------------------------- */
+
+  /* ボタンの文字色 */
+  --kt-button-color: #ff5100;
+
+  /* ボタンの背景色（background-image） */
+  --kt-button-bg-image: linear-gradient(45deg, #ffc107 0%, #ff8b5f 100%);
+
+  /* ボタンの枠線 */
+  --kt-button-border: solid 5px #303030;
+
+  /* ボタンの枠線（hover） */
+  --kt-button-border-hover: solid 5px #606060;
+
+  /* ボタンの文字の影（box-shard） */
+  --kt-button-text-shadow: 5px 5px 5px rgba(255, 255, 255, 0.8);
+
+  /* ボタンの影（box-shard） */
+  --kt-button-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+
+  /* ボタン押下（transform） */
+  --kt-button-down: perspective(100px) translate3d(0px, 0px, -20px);
+
+  /* ボタンの文字のストローク（text-stroke） */
+  --kt-button-stroke: 1px rgba(0,0,0,1);
+
+  /* ------------------------------------------- */
+  /* 各種色の定義                                 */
+  /* ------------------------------------------- */
+
+  /* 各ページの背景色 */
+  --kt-page-background: #dd9565;
+}
+
+/* =========================================== */
+/* サイズを設定するスタイル                      */
+/* =========================================== */
+
+/* 自分のサイズを親のサイズに合わせる */
+.kt-box-fit {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+/* =========================================== */
+/* 要素の並びを設定するスタイル                  */
+/* =========================================== */
+
+/* 横並び（左寄せ） */
+.kt-flex-horizontal-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* 縦並び（左寄せ） */
+.kt-flex-vertical-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* 縦並び（中央） */
+.kt-flex-vertical-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================================== */
+/* 文字スタイル                                 */
+/* =========================================== */
+
+/* 標準 */
+.kt-font {
+  font-weight: 900;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 1);
+}
+
+/* ストロークが太い文字 */
+.kt-font-bold-stroke {
+  font-weight: 900;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
+  -webkit-text-stroke: 3px rgba(0, 0, 0, 1);
+}
+
+/* =========================================== */
+/* 枠に関するスタイル                           */
+/* =========================================== */
+
+/* 浮いて見えるフレーム */
+.kt-floating-frame {
+  border: solid 1px #303030;
+  box-shadow: var(--kt-frame-shadow);
+  border-radius: 10px;
+}
+
+/* =========================================== */
+/* 影を設定するスタイル                          */
+/* =========================================== */
+
+/* フレームの影 */
+.kt-box-shadow {
+  box-shadow: var(--kt-frame-shadow);
+}
+
+/* 文字の影 */
+.kt-text-shadow {
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8) ;
+}

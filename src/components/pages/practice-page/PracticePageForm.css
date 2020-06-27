@@ -1,116 +1,98 @@
-* {
-  user-select: none;
-}
+/* ------------------------------------------- */
+/* 練習ページの定義                              */
+/* ------------------------------------------- */
 
-:focus {
-  outline: none;
-}
-
+/* 練習ページの背景画像（透過させるために別フレームとしている） */
 .practice-page-background {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
   display: flex;
   background: center/100% url('../../../images/background-outer-frame.png');
-  /* opacity: 0.3; */
+  opacity: 0.3;
   z-index: 1;
 }
 
+/* 練習ページの背景色（title-page-backgroundと合わせて利用）*/
 .practice-page-outer-frame {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   z-index: 10;
 }
 
+/* 練習ページの枠 */
 .practice-page-inner-frame {
   position: relative;
   width: 1080;
-  height: 700;
+  height: 768;
   top: 10px;
-  padding: 5px;
-  border-radius: 10px;
-  /* border: solid 5px rgba(0, 0, 0, 0.3); */
-  border: solid 1px #303030;
-  background-color: rgb(247, 230, 136);
-
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3) ;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  background-color: var(--kt-practice-page-background);
   overflow: hidden;
-  opacity: 1.0;
 }
 
+/* 練習ページヘッダーの枠 */
 .header-frame {
   width: 960px;
   height: 80px;
-  margin-bottom: 10px;
-  border: solid 1px #303030;
-  border-radius: 10px;
   display: flex;
   justify-content: space-between;
-  /* background-color: rgb(199, 226, 241); */
-  background-color: rgb(159, 215, 243);
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+  background-color: var(--kt-practice-header-background);
   padding: 0px 10px 0px 10px;
   margin: 10px 5px 10px 5px;
 }
 
+/* ------------------------------------------- */
+/* 成功カウンターの定義                          */
+/* ------------------------------------------- */
+
+/* 成功カウンターの枠 */
 .success-counter-frame {
   width: 350px;
   height: 70px;
-  /* background-color: dimgray; */
   display: flex;
 }
 
+/* 成功カウンターのタイトル */
 .success-counter-title {
-  color: #0b9ee2;
+  color: var(--kt-success-counter-title-color);
   font-size: 60px;
-  font-weight: 900;
-  /* background-color: green; */
   line-height: 80px;
-  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
-  -webkit-text-stroke: 3px rgba(0,0,0,1);
-  }
+}
 
+/* 成功カウンターの値の枠 */
 .success-counter-value-frame {
   position: relative;
 }
 
+/* 成功カウンターの値 */
 .success-counter-value-base {
   position: absolute;
   top: 0px;
   left: 0px;
-  color: #05bedf;
+  color: var(--kt-success-counter-value-color);
   font-size: 70px;
-  font-weight: 900;
   margin-left: 10px;
   line-height: 80px;
-  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6) ;
-  -webkit-text-stroke: 3px rgba(0,0,0,1);
 }
 
+/* 成功カウンターの値（フェードインアニメーション） */
 .success-counter-value-fadein {
   animation: 0.5s step-end animation-success-counter-value-fadein;
   z-index: 9;
 }
+@keyframes animation-success-counter-value-fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
+/* 成功カウンターの値（一つ前の値をクルッと回すアニメーション） */
 .success-counter-before-value {
   z-index: 10;
   opacity: 0;
   animation: 0.5s ease-in animation-success-counter-value;
 }
-
 @keyframes animation-success-counter-value {
   0% {
     transform: perspective(100px) rotate3d(0, 0, 1, 0deg) translate3d(0px, 0px, 50px);
@@ -122,7 +104,46 @@
   }
 }
 
-@keyframes animation-success-counter-value-fadein {
+/* ------------------------------------------- */
+/* 失敗カウンターの定義                          */
+/* ------------------------------------------- */
+
+/* 失敗カウンターの枠 */
+.miss-counter-frame {
+  width: 350px;
+  height: 70px;
+  display: flex;
+}
+
+/* 失敗カウンターのタイトル */
+.miss-counter-title {
+  color: var(--kt-miss-counter-title-color);
+  font-size: 60px;
+  line-height: 80px;
+}
+
+/* 失敗カウンターの値の枠 */
+.miss-counter-value-frame {
+  position: relative;
+}
+
+/* 失敗カウンターの値 */
+.miss-counter-value-base {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: var(--kt-miss-counter-value-color);
+  font-size: 70px;
+  margin-left: 10px;
+  line-height: 80px;
+}
+
+/* 失敗カウンターの値（フェードインアニメーション） */
+.miss-counter-value-fadein {
+  animation: 0.5s step-end animation-miss-counter-value-fadein;
+  z-index: 9;
+}
+@keyframes animation-miss-counter-value-fadein {
   0% {
     opacity: 0;
   }
@@ -131,51 +152,12 @@
   }
 }
 
-
-
-.miss-counter-frame {
-  width: 350px;
-  height: 70px;
-  display: flex;
-}
-
-.miss-counter-title {
-  color: #c03c13;
-  font-size: 60px;
-  font-weight: 900;
-  line-height: 80px;
-  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
-  -webkit-text-stroke: 3px rgba(0,0,0,1);
-  }
-
-.miss-counter-value-frame {
-  position: relative;
-}
-
-.miss-counter-value-base {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  color: #be0615;
-  font-size: 70px;
-  font-weight: 900;
-  margin-left: 10px;
-  line-height: 80px;
-  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6) ;
-  -webkit-text-stroke: 3px rgba(0,0,0,1);
-}
-
-.miss-counter-value-fadein {
-  animation: 0.5s step-end animation-miss-counter-value-fadein;
-  z-index: 9;
-}
-
+/* 成功カウンターの値（一つ前の値をクルッと回すアニメーション） */
 .miss-counter-before-value {
   z-index: 10;
   opacity: 0;
   animation: 0.5s ease-in animation-miss-counter-value;
 }
-
 @keyframes animation-miss-counter-value {
   0% {
     transform: perspective(100px) rotate3d(0, 0, 1, 0deg) translate3d(0px, 0px, 50px);
@@ -187,7 +169,32 @@
   }
 }
 
-@keyframes animation-miss-counter-value-fadein {
+/* ------------------------------------------- */
+/* 残り時間の定義                               */
+/* ------------------------------------------- */
+
+/* 残り時間の枠 */
+.remaining-time-frame {
+  position: relative;
+  width: 150px;
+  height: 70px;
+}
+
+/* 残り時間の値 */
+.remaining-time-base {
+  position: absolute;
+  top: 0px;
+  color: var(--kt-remaining-time-color);
+  font-size: 70px;
+  line-height: 80px;
+}
+
+/* 残り時間の値（フェードインアニメーション） */
+.remaining-time-fadein {
+  animation: 0.5s step-end animation-remaining-time-fadein;
+  z-index: 9;
+}
+@keyframes animation-remaining-time-fadein {
   0% {
     opacity: 0;
   }
@@ -196,34 +203,12 @@
   }
 }
 
-.remaining-time-frame {
-  position: relative;
-  width: 150px;
-  height: 70px;
-}
-
-.remaining-time-base {
-  position: absolute;
-  top: 0px;
-  color: #1cc006fa;
-  font-size: 70px;
-  font-weight: 900;
-  line-height: 80px;
-  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6) ;
-  -webkit-text-stroke: 3px rgba(0, 0,0,1);
-}
-
-.remaining-time-fadein {
-  animation: 0.5s step-end animation-remaining-time-fadein;
-  z-index: 9;
-}
-
+/* 成功カウンターの値（一つ前の値をクルッと回すアニメーション） */
 .remaining-time-before {
   z-index: 10;
   opacity: 0;
   animation: 0.5s ease-out animation-remaining-time;
 }
-
 @keyframes animation-remaining-time {
   0% {
     transform: perspective(100px) rotate3d(0, 1, 0, 0deg) translate3d(0px, 0px, 20px);
@@ -235,241 +220,268 @@
   }
 }
 
-@keyframes animation-remaining-time-fadein {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
+/* ------------------------------------------- */
+/* キーボードの定義                             */
+/* ------------------------------------------- */
 
-
-
+/* キーボードの枠 */
 .keyboard-frame {
   width: 100%;
   height: 200px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-
 }
 
+/* キーボードのキーの枠 */
 .keycap-frame {
   width: 40px;
   height: 40px;
   margin: 3px;
 }
 
+/* キーボードのキーのベース（body、body-disable、body-downと組み合わせる定義） */
 .keycap-body-base {
   width: 36px;
   height: 36px;
-  border-radius: 7px;
-  border: solid 1px #303030;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 25px;
-  font-weight: 900;
   transition: ease-out 0.1s;
 }
 
+/* キーボードのキー（標準） */
 .keycap-body {
   background-color: rgb(236, 255, 183);
-  box-shadow: 10px 10px 10px rgba(0,0,0,0.6);
   transform: perspective(100px) translate3d(0px, 0px, 0px);
 }
 
+/* キーボードのキー（無効） */
 .keycap-body-disabled {
   color: #808080;
-  box-shadow: 10px 10px 10px rgba(0,0,0,0.6);
-  opacity: 0.3;
+  opacity: 0.6;
 }
 
+/* キーボードのキー（キーダウン状態） */
 .keycap-body-down {
   background-color: rgb(92, 99, 72) !important;
   transform: perspective(100px) translate3d(10px, 0px, 0px);
 }
 
+/* キーの背景色（左手・人差し指）*/
 .keycap-left-first-finger {
   background-color: rgb(200, 241, 154);
 }
 
+/* キーの背景色（左手・中指）*/
 .keycap-left-second-finger {
   background-color: rgb(154, 241, 222);
 }
 
+/* キーの背景色（左手・薬指）*/
 .keycap-left-third-finger {
   background-color: rgb(154, 167, 241);
 }
 
+/* キーの背景色（左手・小指）*/
 .keycap-left-forth-finger {
   background-color: rgb(177, 154, 241);
 }
 
+/* キーの背景色（右手・人差し指）*/
 .keycap-right-first-finger {
   background-color: rgb(216, 154, 241);
 }
 
+/* キーの背景色（右手・中指）*/
 .keycap-right-second-finger {
   background-color: rgb(241, 154, 173);
 }
 
+/* キーの背景色（右手・薬指）*/
 .keycap-right-third-finger {
   background-color: rgb(241, 182, 154);
 }
 
+/* キーの背景色（右手・小指）*/
 .keycap-right-forth-finger {
   background-color: rgb(241, 218, 154);
 }
 
-
-.keyboard-line1-frame {
+/* キーの枠（１段目） */
+.keyboard-first-row-frame {
   width: 600px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
   margin-left: 10px;
-  /* background-color: green; */
 }
 
-.keyboard-line2-frame {
+/* キーの枠（２段目） */
+.keyboard-second-row-frame {
   width: 600px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-left: 20px;
-  /* background-color: rgb(36, 124, 36); */
-}
-
-.keyboard-line3-frame {
-  width: 600px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
   margin-left: 30px;
-  /* background-color: rgb(31, 66, 31); */
 }
 
-.keyboard-line4-frame {
+/* キーの枠（３段目） */
+.keyboard-theard-row-frame {
   width: 600px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-left: 40px;
-  /* background-color: rgb(74, 97, 74); */
+  margin-left: 50px;
 }
 
+/* キーの枠（４段目） */
+.keyboard-last-row-frame {
+  width: 600px;
+  margin-left: 70px;
+}
 
+/* ------------------------------------------- */
+/* 練習開始アニメーションの定義                  */
+/* ------------------------------------------- */
+
+/* 練習開始アニメーションの枠 */
+.parctice-start-animation-layer-frame {
+  z-index: 21;
+}
+
+/* 練習開始アニメーションの文字のベース（animation-1～6の共通定義） */
+.practice-start-animation-base {
+  color: var(--kt-practice-start-amination-color);
+  font-size: 150px;
+  opacity: 0;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウン） */
+.practice-start-animation-1 {
+  animation: animation-practice-start-animation 1s ease-in 0s;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウン） */
+.practice-start-animation-2 {
+  animation: animation-practice-start-animation 1s ease-in 1s;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウン） */
+.practice-start-animation-3 {
+  animation: animation-practice-start-animation 1s ease-in 2s;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウン） */
+.practice-start-animation-4 {
+  animation: animation-practice-start-animation 1s ease-in 3s;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウン） */
+.practice-start-animation-5 {
+  animation: animation-practice-start-animation 1s ease-in 4s;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウン） */
+.practice-start-animation-6 {
+  animation: animation-practice-start-animation 1s ease-in 5s;
+}
+@keyframes animation-practice-start-animation {
+  from {
+    transform: rotate(0deg) scale(2);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(360deg) scale(0.3);
+    opacity: 0.1;
+  }
+}
+
+/* ------------------------------------------- */
+/* 練習終了アニメーションの定義                  */
+/* ------------------------------------------- */
+
+/* 練習終了アニメーションの枠 */
+.practice-end-animation-layer-frame {
+  z-index: 21;
+}
+
+/* 練習終了アニメーションの文字のベース（animation-1～5の共通定義） */
+.practice-end-animation-base {
+  color: var(--kt-practice-end-amination-color);
+  font-size: 130px;
+  opacity: 0;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウンと結果） */
+.practice-end-animation-1 {
+  animation: animation-practice-end-animation 3s ease-out 0s;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウンと結果） */
+.practice-end-animation-2 {
+  animation: animation-practice-end-animation 3s ease-out 3s;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウンと結果） */
+.practice-end-animation-3 {
+  animation: animation-practice-end-animation 3s ease-out 6s;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウンと結果） */
+.practice-end-animation-4 {
+  animation: animation-practice-end-animation 3s ease-out 9s;
+}
+
+/* 練習開始アニメーションのアニメーション（カウントダウンと結果） */
+.practice-end-animation-5 {
+  animation: animation-practice-end-animation 3s ease-out 9s;
+}
+@keyframes animation-practice-end-animation {
+  0% {
+    transform: perspective(500px) rotate3d(1, 0, 0, 0deg) scale(2);
+    opacity: 0.2;
+  }
+  25% {
+    transform: perspective(500px) rotate3d(1, 0, 0, 720deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: perspective(500px) rotate3d(1, 0, 0, 720deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------- */
+/* ステージ「桜」の定義                          */
+/* ------------------------------------------- */
+
+/* ステージ「桜」の枠 */
 .practice-stage-sakura-frame {
   position: relative;
   width: 980px;
   height: 600px;
   overflow: hidden;
   margin: 5px 10px 5px 10px;
-  border: solid 1px #303030;
-  display: flex;
-  flex-direction: row;
-  background-image: url(../../../images/background-sakura.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  border-radius: 10px;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3) ;
-  /* background-color: blue; */
-  /* z-index: 100; */
-}
-
-.practice-stage-himawari-frame {
-  width: 1000px;
-  height: 600px;
-  display: flex;
-  flex-direction: row;
   background-image: url(../../../images/background-sakura.png);
   background-size: 100%;
   background-repeat: no-repeat;
 }
 
-.practice-stage-kingyo-frame {
-  width: 1000px;
-  height: 600px;
-  display: flex;
-  flex-direction: row;
-  background-image: url(../../../images/background-sakura.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
+/* 「文字」の種別が「桜」の画像とアニメーション */
+.character-sakura {
+  background: center/80% no-repeat url('../../../images/character-sakura.png');
+  animation: 2s ease-in infinite animation-character-sakura;
+  transform-origin: center center;
 }
-
-.practice-stage-hanabi-frame {
-  width: 1000px;
-  height: 600px;
-  display: flex;
-  flex-direction: row;
-  background-image: url(../../../images/background-sakura.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-
-
-.practice-cannon-frame {
-  width: 1000px;
-  height: 600px;
-  display: flex;
-  flex-direction: row;
-  background-image: url(../../../images/background-sakura.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.character-base {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  font-size: 80px;
-  font-weight: 900;
-  color: rgba(0, 0, 0, 0.8);
-  /* border-radius: 50%;
-  border: solid 5px #404040;
-  background-color: #A0A0A0; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.character-number {
-  color: rgba(0, 128, 255, 0.8) !important;
-}
-
-.character-tetal {
-  background: center/80% no-repeat url('../../../images/character-tetal.png');
-  animation: 2.0s ease-in infinite animation-character-tetal;
-  transform-origin:center center;
-}
-
-@keyframes animation-character-tetal {
+@keyframes animation-character-sakura {
   0% {
-    transform: rotate(0deg) rotate3d(1, 0, 0,0deg);
+    transform: rotate(0deg) rotate3d(1, 0, 0, 0deg);
   }
   25% {
-    transform: rotate(20deg) rotate3d(1, 0, 0,360deg);
+    transform: rotate(20deg) rotate3d(1, 0, 0, 360deg);
   }
   75% {
-    transform: rotate(-20deg) rotate3d(1, 0, 0,360deg);
+    transform: rotate(-20deg) rotate3d(1, 0, 0, 360deg);
   }
   100% {
-    transform: rotate(0deg) rotate3d(1, 0, 0,360deg);
+    transform: rotate(0deg) rotate3d(1, 0, 0, 360deg);
   }
 }
 
+/* 「文字」の種別が「小鳥」の画像とアニメーション */
 .character-bird {
   background: center/100% no-repeat url('../../../images/character-bird.png');
-  animation: 2.0s ease-in infinite animation-character-bird;
-  transform-origin:center center;
+  animation: 2s ease-in infinite animation-character-bird;
+  transform-origin: center center;
   padding-left: 20px;
 }
-
 @keyframes animation-character-bird {
   0% {
     transform: perspective(500px) translate3d(0px, 0px, 0px);
@@ -485,130 +497,65 @@
   }
 }
 
+/* ------------------------------------------- */
+/* ステージ「ひまわり」の定義                    */
+/* ------------------------------------------- */
 
-
-.parctice-start-animation-layer-frame {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  z-index: 21;
-}
-
-.practice-start-animation-base {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  color: #f3f703;
-  font-size: 150px;
-  font-weight: 900;
+/* ステージ「ひまわり」の枠 */
+.practice-stage-himawari-frame {
+  width: 1000px;
+  height: 600px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.0;
-
-  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6) ;
-  -webkit-text-stroke: 3px rgba(0,0,0,1);
-
-}
-.practice-start-animation-1 {
-  animation: animation-practice-start-animation 1s ease-in 0s;
+  flex-direction: row;
+  background-image: url(../../../images/background-sakura.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
-.practice-start-animation-2 {
-  animation: animation-practice-start-animation 1s ease-in 1s;
-}
+/* ------------------------------------------- */
+/* ステージ「金魚」の定義                        */
+/* ------------------------------------------- */
 
-.practice-start-animation-3 {
-  animation: animation-practice-start-animation 1s ease-in 2s ;
-}
-
-.practice-start-animation-4 {
-  animation: animation-practice-start-animation 1s ease-in 3s;
-}
-
-.practice-start-animation-5 {
-  animation: animation-practice-start-animation 1s ease-in 4s;
-}
-
-.practice-start-animation-6 {
-  animation: animation-practice-start-animation 1s ease-in 5s;
-}
-
-@keyframes animation-practice-start-animation {
-  from{
-    transform: rotate(0deg) scale(2.0);
-    opacity: 1.0;
-  }
-  to {
-    transform: rotate(360deg) scale(0.3);
-    opacity: 0.1;
-  }
-}
-
-
-.practice-end-animation-layer-frame {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  z-index: 21;
-}
-
-.practice-end-animation-base {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  color: #f3f703;
-  font-size: 130px;
-  font-weight: 900;
+/* ステージ「金魚」の枠 */
+.practice-stage-kingyo-frame {
+  width: 1000px;
+  height: 600px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.0;
-  
-  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6) ;
-  -webkit-text-stroke: 3px rgba(0,0,0,1);
+  flex-direction: row;
+  background-image: url(../../../images/background-sakura.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
-.practice-end-animation-1 {
-  animation: animation-practice-end-animation 3s ease-out 0s;
+/* ------------------------------------------- */
+/* ステージ「花火」の定義                        */
+/* ------------------------------------------- */
+
+/* ステージ「花火」の枠 */
+.practice-stage-hanabi-frame {
+  width: 1000px;
+  height: 600px;
+  display: flex;
+  flex-direction: row;
+  background-image: url(../../../images/background-sakura.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
-.practice-end-animation-2 {
-  animation: animation-practice-end-animation 3s ease-out 3s;
+/* ------------------------------------------- */
+/* ステージに発射する「文字」の定義               */
+/* ------------------------------------------- */
+
+/* 文字のベース（sakura、birdの共通部分）*/
+.character-base {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  font-size: 80px;
+  color: rgba(0, 0, 0, 0.8);
 }
 
-.practice-end-animation-3 {
-  animation: animation-practice-end-animation 3s ease-out 6s;
+/* 「文字」が数字である場合の文字色 */
+.character-number {
+  color: var(--kt-character-number) !important;
 }
-
-.practice-end-animation-4 {
-  animation: animation-practice-end-animation 3s ease-out 9s;
-}
-
-.practice-end-animation-5 {
-  animation: animation-practice-end-animation 3s ease-out 9s;
-}
-
-@keyframes animation-practice-end-animation {
-  0% {
-    transform: perspective(500px) rotate3d(1, 0, 0, 0deg) scale(2.0);
-    opacity: 0.2;
-  }
-  25% {
-    transform: perspective(500px) rotate3d(1, 0, 0, 720deg) scale(1.0);
-    opacity: 1.0;
-  }
-  100% {
-    transform: perspective(500px) rotate3d(1, 0, 0, 720deg) scale(1.0);
-    opacity: 1.0;
-  }
-}
-

@@ -5,6 +5,9 @@ import { actionCreatorFactory } from 'typescript-fsa';
 
 const actionCreator = actionCreatorFactory();
 export const SoundActions = {
+  // BGM変更
+  CHANGED_BGM: actionCreator<{ bgmUrl: string }>('CHANGED_BGM'),
+
   // BGM再生
   PLAYING_BGM: actionCreator<{ bgmUrl: string }>('PLAY_BGM'),
 

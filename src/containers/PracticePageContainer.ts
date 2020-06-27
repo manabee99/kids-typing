@@ -10,8 +10,6 @@ import { HeaderActions } from '../store/actions/HeaderActions';
 import { SoundResources } from '../SoundResources';
 import { withRouter } from 'react-router';
 
-
-
 const mapStateToProps = (appState: AppState) => {
   return {
     // 正解カウンター
@@ -35,6 +33,9 @@ const mapStateToProps = (appState: AppState) => {
     // 押下中キー
     downedKeys: appState.keyboardState.downedKeys,
 
+    // 現在のBGM
+    currentBgmUrl: appState.soundState.currentBgmUrl,
+
     // BGM再生ステータス
     bgmStatus: appState.soundState.bgmStatus,
 
@@ -52,37 +53,34 @@ const mapStateToProps = (appState: AppState) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     // 正解カウンターリセット
-    resetSuccessCounter: () => {dispatch(HeaderActions.RESET_SUCCESS_COUNTER())},
+    resetSuccessCounter: () => dispatch(HeaderActions.RESET_SUCCESS_COUNTER()),
+
     // 正解カウンター加算
-    addSuccessCounter: () => {dispatch(HeaderActions.ADD_SUCCESS_COUNTER())},
+    addSuccessCounter: () => dispatch(HeaderActions.ADD_SUCCESS_COUNTER()),
+
     // 失敗カウンターリセット
-    resetMissCounter: () => {dispatch(HeaderActions.RESET_MISS_COUNTER())},
+    resetMissCounter: () => dispatch(HeaderActions.RESET_MISS_COUNTER()),
+
     // 失敗カウンター加算
-    addMissCounter: () => {dispatch(HeaderActions.ADD_MISS_COUNTER())},
+    addMissCounter: () => dispatch(HeaderActions.ADD_MISS_COUNTER()),
 
     // キーボードリセット
-    resetKeyboard: () => {
-      dispatch(KeyboardActions.RESET_KEYBOARD());
-    },
+    resetKeyboard: () => dispatch(KeyboardActions.RESET_KEYBOARD()),
+
     // キーダウン
-    keyDown: (key: string) => {
-      dispatch(KeyboardActions.KEY_DOWN({ key: key }));
-    },
+    keyDown: (key: string) => dispatch(KeyboardActions.KEY_DOWN({ key: key })),
+
     // キーアップ
-    keyUp: (key: string) => {
-      dispatch(KeyboardActions.KEY_UP({ key: key }));
-    },
+    keyUp: (key: string) => dispatch(KeyboardActions.KEY_UP({ key: key })),
+
+    // ステージ初期化
+    initilizeStage: () => initializeStage(),
 
     // 練習開始アニメーション終了時の処理
-    startAnimationEnd: () => {
-      // 練習開始
-      startPractice();
-    },
+    startAnimationEnd: () => startPractice(),
+
     // 練習終了アニメーション終了時の処理
-    endAnimationEnd: () => {
-      // 練習終了
-      endPractice();
-    },
+    endAnimationEnd: () => endPractice(),
 
     // BGM開始
     playingBgm: (bgmUrl: string) => dispatch(SoundActions.PLAYING_BGM({ bgmUrl: bgmUrl })),
@@ -101,16 +99,14 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PracticePageForm));
 
 /**
- * 練習開始
+ * ステージ初期化
  */
-var intervalHandle: any = null;
-function startPractice(): void {
-
+function initializeStage(): void {
   // 現在のレベルをもとにステージ定義を取得する
   const stageConfig = getStageConfig(store.getState().titleState.practiceLevel);
 
-  // 現在のレベルの有効キーをもとに練習中に排出する「文字」の配列を作成する
-  const practiceCharacters = createPracticeCaracters(60, stageConfig.enabledKeys);
+  // ステージ毎のBGMを設定する
+  store.dispatch(SoundActions.CHANGED_BGM({ bgmUrl: stageConfig.backgroundMusic }));
 
   // キーボードに有効キーを設定する
   store.dispatch(KeyboardActions.ENABLED_KEYS({ keys: Array.from(stageConfig.enabledKeys) }));
@@ -122,7 +118,6 @@ function startPractice(): void {
 
   // キーアップイベントハンドラーを登録
   window.addEventListener('keyup', (e: KeyboardEvent) => {
-
     // 「文字」が画面に表示されていないときはミスカウンターを加算する
     if (store.getState().typingEngineState.characterStateList.length === 0) {
       store.dispatch(HeaderActions.ADD_MISS_COUNTER());
@@ -146,11 +141,23 @@ function startPractice(): void {
     // 100ミリ秒後にキーボードのキーアップアクションをディスパッチする（キーを一定時間押下してからアップさせるための処理）
     setTimeout(() => store.dispatch(KeyboardActions.KEY_UP({ key: e.key.toLocaleUpperCase() })), 100);
   });
+}
+
+/**
+ * 練習開始
+ */
+var intervalHandle: any = null;
+function startPractice(): void {
+  // 現在のレベルをもとにステージ定義を取得する
+  const stageConfig = getStageConfig(store.getState().titleState.practiceLevel);
+
+  // 現在のレベルの有効キーをもとに練習中に排出する「文字」の配列を作成する
+  const practiceCharacters = createPracticeCaracters(60, stageConfig.enabledKeys);
 
   // 練習時間に60秒を設定して練習を開始する
   store.dispatch(TypingEngineActions.START_PRACTICE({ startTime: 60 }));
 
-  // 練習メインループを開始する（FPS30）
+  // 練習メインループを開始する（FPS60）
   const fps = 60;
   intervalHandle = setInterval(main, 1000 / fps, fps, stageConfig.fireInterval, practiceCharacters);
 }
@@ -159,17 +166,16 @@ function startPractice(): void {
  * 練習終了
  */
 function endPractice(): void {
-
   // レベルアップ判定
   if (store.getState().headerState.missCounter <= 3) {
     // レベルアップ
     store.dispatch(TitleActions.PRACTICE_LEVEL_UP());
 
     // レベルアップ効果音鳴動
-    store.dispatch(SoundActions.PLAYING_SOUND_EFFECT({soundUrl: SoundResources.seVoiceGoodJob}));
+    store.dispatch(SoundActions.PLAYING_SOUND_EFFECT({ soundUrl: SoundResources.seVoiceGoodJob }));
   } else {
     // レベル保留残念効果音鳴動
-    store.dispatch(SoundActions.PLAYING_SOUND_EFFECT({soundUrl: SoundResources.seVoicePity}));
+    store.dispatch(SoundActions.PLAYING_SOUND_EFFECT({ soundUrl: SoundResources.seVoicePity }));
   }
 
   // 練習レベルをweb storageに保存する
@@ -182,43 +188,52 @@ function endPractice(): void {
   clearInterval(intervalHandle);
 
   // タイトル画面に遷移する
-  window.location.replace('/kids-typing/title');
+  window.location.replace('/kids-typing/title/' + (store.getState().soundState.soundMuting ? 'true' : 'false'));
 }
 
+/**
+ * 練習画面のメインループ
+ * 定期的に「文字」を発射して「文字」を移動させるために時間経過アクションをディスパッチする。
+ * cntとfireCharaIndexを何とかしたい・・・
+ */
 var cnt = 0;
-var charaCnt = 0;
+var fireCharaIndex = 0;
 function main(fps: number, fireInterval: number, practiceCharacter: string[]) {
-
   // 残り時間が０になったときは何もしない
   if (store.getState().headerState.remainingTime <= 0) {
     return;
   }
 
   // 残り時間を算出する
-  const remainingTime = 
-    store.getState().typingEngineState.practiceTime - 
-    Math.round(((new Date().getTime()) - store.getState().typingEngineState.practiceStartTime) / 1000);
+  const remainingTime =
+    store.getState().typingEngineState.practiceTime -
+    Math.round((new Date().getTime() - store.getState().typingEngineState.practiceStartTime) / 1000);
 
   // ヘッダの残り時間を更新する
-  store.dispatch(HeaderActions.UPDATE_REMAINING_TIME({remainingTime: remainingTime}));
+  store.dispatch(HeaderActions.UPDATE_REMAINING_TIME({ remainingTime: remainingTime }));
 
   // 時間を進める
   store.dispatch(TypingEngineActions.TICK_NOT_ENTERED());
   store.dispatch(TypingEngineActions.TICK());
 
   // 「文字」出力間隔に達した場合は「文字」を出力する
-  if ((cnt * (1000 / fps)) > fireInterval) {
+  if (cnt * (1000 / fps) > fireInterval) {
     store.dispatch(
       TypingEngineActions.FIRE_CHARACTER({
-        character: practiceCharacter[charaCnt],
+        character: practiceCharacter[fireCharaIndex],
       })
     );
     cnt = 0;
-    charaCnt++;
+    fireCharaIndex++;
   }
   cnt++;
 }
 
+/**
+ * 発射する「文字」の配列を作成する。
+ * @param characterCount 作り出す配列の総数
+ * @param sourceCharacter 配列に組み込む「文字」
+ */
 function createPracticeCaracters(characterCount: number, sourceCharacter: string): string[] {
   // 総数に合わせて元「文字」を増やす
   var characters = '';
@@ -229,7 +244,7 @@ function createPracticeCaracters(characterCount: number, sourceCharacter: string
   // 総数を超えた部分を削除する
   const charactersArray = Array.from(characters.substr(0, characterCount));
 
-  // 文字をシャッフルする
+  // 文字配列をシャッフルする
   for (var i = 0; i < 100; i++) {
     const idx1 = Math.round(Math.random() * (characterCount - 1));
     const idx2 = Math.round(Math.random() * (characterCount - 1));
@@ -268,28 +283,28 @@ function getStageConfig(practiceLevel: number): StageConfig {
   const stateConfig: StageConfig[] = [
     {
       stageType: 'sakura',
-      backgroundMusic: '',
+      backgroundMusic: SoundResources.bgmStagesakura,
       enabledKeys: 'DFJK',
       importantKeys: '',
       fireInterval: 1000,
     },
     {
       stageType: 'sakura',
-      backgroundMusic: '',
+      backgroundMusic: SoundResources.bgmStagesakura,
       enabledKeys: 'SDFJKL',
       importantKeys: 'SL',
       fireInterval: 2000,
     },
     {
       stageType: 'sakura',
-      backgroundMusic: '',
+      backgroundMusic: SoundResources.bgmStagesakura,
       enabledKeys: 'ASDFGHJKL',
       importantKeys: 'GH',
       fireInterval: 2000,
     },
     {
       stageType: 'sakura',
-      backgroundMusic: '',
+      backgroundMusic: SoundResources.bgmStagesakura,
       enabledKeys: 'RUASDFGHJKL',
       importantKeys: 'RU',
       fireInterval: 2000,

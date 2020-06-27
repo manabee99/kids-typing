@@ -3,7 +3,7 @@
 /* =========================================== */
 * {
   /* フォント */
-  font-family: '游ゴシック体', 'Yu Gothic', 'YuGothic', 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', 'Osaka', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+  font-family: 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', 'Osaka', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 
   /* 文字を選択させない */
   user-select: none;
@@ -34,6 +34,30 @@
 
   /* タイトルの文字色 */
   --kt-title-color: #f3f703;
+
+  /* 練習開始アニメーションの文字色 */
+  --kt-practice-start-amination-color: #f3f703;
+
+  /* 練習終了アニメーションの文字色 */
+  --kt-practice-end-amination-color: #f3f703;
+
+  /* 成功カウンターのタイトル文字色 */
+  --kt-success-counter-title-color: #0b9ee2;
+
+  /* 成功カウンターの値の文字色 */
+  --kt-success-counter-value-color: #05bedf;
+
+  /* 失敗カウンターのタイトル文字色 */
+  --kt-miss-counter-title-color: #c03c13;
+
+  /* 失敗カウンターの値の文字色 */
+  --kt-miss-counter-value-color: #be0615;
+
+  /* 残り時間の値の文字色 */
+  --kt-remaining-time-color: #1cc006;
+
+  /* 「文字」が数字であるときの文字色 */
+  --kt-character-number: #0080ff;
 
   /* ------------------------------------------- */
   /* ボタンの定義                                 */
@@ -69,6 +93,25 @@
 
   /* 各ページの背景色 */
   --kt-page-background: #dd9565;
+
+  /* 練習ページの背景色 */
+  --kt-practice-page-background: #f7e688;
+
+  /* 練習ページのヘッダーの背景色 */
+  --kt-practice-header-background: #9fd7f3;
+
+  /* ------------------------------------------- */
+  /* エフェクト関連の定義                          */
+  /* ------------------------------------------- */
+ 
+  /* 正解アニメーション */
+  --kt-ef-correct-animation-border: 55px dotted #0495d8;
+
+  /* 失敗アニメーション */
+  --kt-ef-miss-animation-border: 45px dashed #da4703;
+
+  /* 入力文字のカーソル */
+  --kt-ef-input-cursor-border: 40px dashed #B04000;
 }
 
 /* =========================================== */

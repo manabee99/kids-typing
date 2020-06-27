@@ -1,4 +1,8 @@
+/* ------------------------------------------- */
+/* エフェクトレイヤーの定義                      */
+/* ------------------------------------------- */
 
+/* 練習画面の上に重ねて表示するエフェクトレイヤー */
 .effect-layer-frame {
   position: absolute;
   z-index: 20;
@@ -9,18 +13,16 @@
   overflow: hidden;
 }
 
+/* ------------------------------------------- */
+/* 正解エフェクト                               */
+/* ------------------------------------------- */
 .ef-correct {
   position: absolute;
   border-radius: 50%;
-  border: 55px dotted rgb(4, 149, 216);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: var(--kt-ef-correct-animation-border);
   opacity: 0.0;
   animation: 0.4s ease-out animation-ef-correct;
 }
-
-
 @keyframes animation-ef-correct {
   0% {
     transform: scale(0.05) rotate(0deg);
@@ -32,19 +34,16 @@
   }
 }
 
-
+/* ------------------------------------------- */
+/* 失敗エフェクト                               */
+/* ------------------------------------------- */
 .ef-miss {
   position: absolute;
-  border: 45px dashed rgb(218, 71, 3);
+  border: var(-kt-ef-miss-animation-border);
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   opacity: 0.0;
   animation: 0.4s ease-out animation-ef-miss;
 }
-
-
 @keyframes animation-ef-miss {
   0%{
     transform: scale(1.0) rotate(0deg);
@@ -56,19 +55,12 @@
   }
 }
 
-
+/* ------------------------------------------- */
+/* 「文字」のカーソルエフェクト                  */
+/* ------------------------------------------- */
 .ef-input-cursor {
-  border:  dashed 40px #B04000;
+  border: var(--kt-ef-input-cursor-border);
   position: absolute;
   width: 150px;
   height: 150px;
-}
-
-
-.parctice-start-animation-layer-frame {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
 }

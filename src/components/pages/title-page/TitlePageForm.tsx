@@ -67,15 +67,15 @@ interface OwnProps {
 }
 
 // パラメータの型定義
-type Props = OwnProps & RouteComponentProps;
+type Props = OwnProps & RouteComponentProps<{soundMuting: string}>;
 
 // --------------------------------------------
 // タイトルページのForm Component
 // --------------------------------------------
-
 export class TitlePageForm extends React.Component<Props> {
   render() {
-    // CSSを定義
+
+    // CSSを定義（クラスの定義が長くなってJSXの可読性が悪くなるので一旦変数に格納）
     const cls = {
       pageBackground: 'kt-box-fit title-page-background',
       outerFrame: 'kt-box-fit title-page-outer-frame',
@@ -87,9 +87,9 @@ export class TitlePageForm extends React.Component<Props> {
         {/* タイトル画面の背景画像 */}
         <div className={cls.pageBackground}></div>
 
-        {/* タイトル画面の背景（枠の外側） */}
+        {/* タイトル画面の背景（枠の外側・画面全体） */}
         <div className={cls.outerFrame}>
-          {/* タイトル画面（枠の中） */}
+          {/* タイトル画面（枠の中・タイトル画面） */}
           <div className={cls.innerFrame}>
             {/* タイトルロゴ */}
             <TitleLogo></TitleLogo>
@@ -129,6 +129,10 @@ export class TitlePageForm extends React.Component<Props> {
   componentDidMount() {
     // 練習レベルをロードする
     this.props.loadPracticeLevel();
+    // ミュート状態を設定する
+    if (this.props.match.params.soundMuting === "false") {
+      this.props.soundMute();
+    }
   }
 
   /**

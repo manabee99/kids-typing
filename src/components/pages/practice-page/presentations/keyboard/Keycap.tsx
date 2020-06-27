@@ -1,5 +1,7 @@
-import '../../PracticePageForm.css';
 import React from 'react';
+
+import '../../../../common/KidsTypingCommon.css';
+import '../../PracticePageForm.css';
 
 // --------------------------------------------
 // キーボードのキーComponent
@@ -17,28 +19,31 @@ interface OwnProps {
 
 type KeycapProps = OwnProps;
 export const Keycap: React.FC<KeycapProps> = (props) => {
+  // CSSを定義（クラスの定義が長くなってJSXの可読性が悪くなるので一旦変数に格納）
+  const cls = {
+    frame: 'keycap-frame',
+  };
+
+  // キーに対応するcssを決定する
+  const keyClassMap = [
+    { keys: '1QAZ', className: 'kt-floating-frame kt-flex-vertical-center kt-box-shadow kt-font keycap-body-base keycap-left-first-finger' },
+    { keys: '2WSX', className: 'kt-floating-frame kt-flex-vertical-center kt-box-shadow kt-font keycap-body-base keycap-left-second-finger' },
+    { keys: '3EDC', className: 'kt-floating-frame kt-flex-vertical-center kt-box-shadow kt-font keycap-body-base keycap-left-third-finger' },
+    { keys: '45RTFGVB', className: 'kt-floating-frame kt-flex-vertical-center kt-box-shadow kt-font keycap-body-base keycap-left-forth-finger' },
+    { keys: '67YUHJNM', className: 'kt-floating-frame kt-flex-vertical-center kt-box-shadow kt-font keycap-body-base keycap-right-first-finger' },
+    { keys: '8IK,', className: 'kt-floating-frame kt-flex-vertical-center kt-box-shadow kt-font keycap-body-base keycap-right-second-finger' },
+    { keys: '9OL.', className: 'kt-floating-frame kt-flex-vertical-center kt-box-shadow kt-font keycap-body-base keycap-right-third-finger' },
+    { keys: '0P+/-@*_^[]\\', className: 'kt-floating-frame kt-flex-vertical-center kt-box-shadow kt-font keycap-body-base keycap-right-forth-finger' },
+  ];
+  var keyClassName = keyClassMap.filter((m) => m.keys.indexOf(props.keycapCharacter) !== -1)[0].className;
+
+  // 有効・無効、キーダウン状態を表現するclassを追加
+  keyClassName += props.enabledKey === false ? ' keycap-body-disabled' : props.keyDown ? ' keycap-body-down' : ' keycap-body';
+
   return (
-    <div className='keycap-frame'>
-      <div
-        className={
-          'keycap-body-base' +
-          (props.enabledKey === false
-            ? ' keycap-body-disabled'
-            : props.keyDown
-            ? ' keycap-body-down'
-            : ' keycap-body') +
-          ("1QAZ".indexOf(props.keycapCharacter ) !== -1 ? ' keycap-left-forth-finger' : '') +
-          ("2WSX".indexOf(props.keycapCharacter ) !== -1 ? ' keycap-left-third-finger' : '') +
-          ("3EDC".indexOf(props.keycapCharacter ) !== -1 ? ' keycap-left-second-finger' : '') +
-          ("45RTFGVB".indexOf(props.keycapCharacter ) !== -1 ? ' keycap-left-first-finger' : '') +
-          ("67YUHJNM".indexOf(props.keycapCharacter ) !== -1 ? ' keycap-right-first-finger' : '') +
-          ("8IK,)".indexOf(props.keycapCharacter ) !== -1 ? ' keycap-right-second-finger' : '') +
-          ("9OL.".indexOf(props.keycapCharacter ) !== -1 ? ' keycap-right-third-finger' : '') +
-          ("0P+/-@*_^[]\\".indexOf(props.keycapCharacter ) !== -1 ? ' keycap-right-forth-finger' : '')
-        }
-      >
-        {props.keycapCharacter}
-      </div>
+    <div className={cls.frame}>
+      {/* キー */}
+      <div className={keyClassName}>{props.keycapCharacter}</div>
     </div>
   );
 };

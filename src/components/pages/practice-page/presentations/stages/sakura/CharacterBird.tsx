@@ -1,5 +1,7 @@
-import '../../../PracticePageForm.css';
 import React from 'react';
+
+import '../../../../../common/KidsTypingCommon.css';
+import '../../../PracticePageForm.css';
 
 // --------------------------------------------
 // タイプ練習の文字（小鳥）Component
@@ -28,10 +30,9 @@ type CharacterBirdProps = OwnProps;
 export const CharacterBird: React.FC<CharacterBirdProps> = (props) => {
   return (
     <div
-      className={
-        'character-base character-bird ' +
-        ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')
-      }
+      key={'bird' + props.componentId}
+      // ゼロとＯを区別するために数字は文字色を変更するクラスを追加する
+      className={'kt-flex-vertical-center kt-font character-base character-bird ' + ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')}
       style={{ top: Math.round(props.top), left: Math.round(props.left) }}
     >
       {props.character}

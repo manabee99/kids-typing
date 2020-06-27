@@ -1,5 +1,7 @@
-import "./EffectLayer.css";
 import React from "react";
+
+import '../common/KidsTypingCommon.css';
+import "./EffectLayer.css";
 
 // --------------------------------------------
 // ミス用のエフェクトComponent
@@ -25,7 +27,7 @@ type EFMissProps = OwnProps;
 export const EfMiss: React.FC<EFMissProps> = (props) => {
   return (
     <div
-      className="ef-miss"
+      className="kt-flex-vertical-center ef-miss"
       style={{
         top: props.top - 12,
         left: props.left - 12,

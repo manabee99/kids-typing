@@ -5,6 +5,9 @@ import { SoundActions } from '../actions/SoundActions';
 // サウンドの状態
 // --------------------------------------------
 export interface SoundState {
+  // 現在のBGM
+  currentBgmUrl: string;
+
   // BGM再生ステータス
   bgmStatus: SoundStatus;
 
@@ -14,7 +17,7 @@ export interface SoundState {
   // サウンドエフェクトIDシーケンス
   soundEffectIdSequence: number;
 
-  // ミュート
+  // ミュート（true: ミュート中、false: ミュート解除中）
   soundMuting: boolean;
 }
 
@@ -39,6 +42,7 @@ export interface SoundStatus {
 // 初期状態
 // --------------------------------------------
 export const soundInitialState: SoundState = {
+  currentBgmUrl: '',
   bgmStatus: {
     soundEffectId: '',
     soundStatus: 'STOPPED',
@@ -54,6 +58,14 @@ export const soundInitialState: SoundState = {
 // サウンド Reducer
 // --------------------------------------------
 export const soundReducer = reducerWithInitialState(soundInitialState)
+  // BGN変更
+  .case(SoundActions.CHANGED_BGM, (state, payload) => {
+    return {
+      ...state,
+      currentBgmUrl: payload.bgmUrl,
+    };
+  })
+
   // BGN再生
   .case(SoundActions.PLAYING_BGM, (state, payload) => {
     return {

@@ -4,14 +4,14 @@ export const SoundResources = {
   // bgmStageStart: require('./sounds/bgm-stage-start@suisougakubunonatsu.mp3'),
   bgmTitle: require('./sounds/bgm-title@happytime.mp3'),
   // bgmStageStart: require('./sounds/bgm-stage-start@sanjinooyatsu.mp3'),  
-  bgmStageTetal: require('./sounds/bgm-stage-tetal@sanjinooyatsu.mp3'),
+  bgmStagesakura: require('./sounds/bgm-stage-sakura@sanjinooyatsu.mp3'),
   bgmStageEnd: require('./sounds/bgm-stage-end@nichinichikorekoujitsu.mp3'),
   
   seTitleStart: require('./sounds/se-title-start.mp3'),
   seSuccess: require('./sounds/se-success.mp3'),
   seMiss: require('./sounds/se-miss.mp3'),
-  // seStageTetalStart: require('./sounds/se-stage-tetal-start@blackout_piano1.mp3'),
-  seStageTetalStart: require('./sounds/se-stage-tetal-start@rappa.mp3'),
+  // seStagesakuraStart: require('./sounds/se-stage-sakura-start@blackout_piano1.mp3'),
+  seStagesakuraStart: require('./sounds/se-stage-sakura-start@rappa.mp3'),
 
 
   seFireCharacter: require('./sounds/se-fire-character@jump13.mp3'),

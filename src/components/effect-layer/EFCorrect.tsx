@@ -1,5 +1,7 @@
-import "./EffectLayer.css";
 import React from "react";
+
+import '../common/KidsTypingCommon.css';
+import "./EffectLayer.css";
 
 // --------------------------------------------
 // 正解用のエフェクトComponent
@@ -25,7 +27,7 @@ type EFCorrectProps = OwnProps;
 export const EfCorrect: React.FC<EFCorrectProps> = (props) => {
   return (
     <div
-      className="ef-correct"
+      className="kt-flex-vertical-center ef-correct"
       style={{
         top: props.top,
         left: props.left,

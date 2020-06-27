@@ -91,7 +91,7 @@ export const typingEngineInitialState: TypingEngineState = {
   effectIdSequence: 0,
 };
 
-const characterTypeList: string[] = ['tetal', 'bird'];
+const characterTypeList: string[] = ['sakura', 'bird'];
 export const typingEngineReducer = reducerWithInitialState(typingEngineInitialState)
   // エンジンリセット
   .case(TypingEngineActions.RESET_ENGINE, (state) => {
@@ -333,7 +333,7 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
 
 function tickCharacterTop(characterType: string, top: number, yAcceleration: number): number {
   switch (characterType) {
-    case 'tetal':
+    case 'sakura':
       return Math.round(top + yAcceleration);
 
     case 'bird':
@@ -344,7 +344,7 @@ function tickCharacterTop(characterType: string, top: number, yAcceleration: num
 
 function tickCharacterLeft(characterType: string, left: number, xAcceleration: number): number {
   switch (characterType) {
-    case 'tetal':
+    case 'sakura':
       return Math.round(left + xAcceleration / 1.3);
 
     case 'bird':
@@ -359,7 +359,7 @@ function tickCharacterYAcceleration(characterType: string, characterState: strin
   }
 
   switch (characterType) {
-    case 'tetal':
+    case 'sakura':
       var acc = yAcceleration + (0.5 - Math.random() * 1);
       if (acc > 1.0) {
         acc = 1.0;

@@ -1,5 +1,7 @@
-import '../../PracticePageForm.css';
 import React from 'react';
+
+import '../../../../common/KidsTypingCommon.css';
+import '../../PracticePageForm.css';
 
 // --------------------------------------------
 // 正解カウンターComponent
@@ -11,18 +13,28 @@ interface OwnProps {
 
 type SuccessCounterProps = OwnProps;
 export const SuccessCounter: React.FC<SuccessCounterProps> = (props) => {
+  // CSSを定義（クラスの定義が長くなってJSXの可読性が悪くなるので一旦変数に格納）
+  const cls = {
+    frame: 'success-counter-frame',
+    title: 'kt-font-bold-stroke success-counter-title',
+    valueFrame: 'success-counter-value-frame',
+    valueFadein: 'kt-font-bold-stroke success-counter-value-base success-counter-value-fadein',
+    beforeValue: 'kt-font-bold-stroke success-counter-value-base success-counter-before-value',
+  };
+
   return (
-    <div className='success-counter-frame'>
-      <div className='success-counter-title'>せいかい</div>
+    <div className={cls.frame}>
+      {/* タイトル */}
+      <div className={cls.title}>せいかい</div>
 
-      <div className='success-counter-value-frame' key={'sc'+ props.successCount}>
-        <div className='success-counter-value-base success-counter-value-fadein'>{props.successCount}</div>
-        { props.successCount > 0
-            ? <div className='success-counter-value-base success-counter-before-value'>{props.successCount - 1}</div>
-            : <div></div>
-        }   
+      {/* 値の枠（keyにカウンター値を設定することでCSSアニメーションを設定したエレメントの再描画を抑止している） */}
+      <div className={cls.valueFrame} key={'success-counter' + props.successCount}>
+        {/* カウンター値（現在の値） */}
+        <div className={cls.valueFadein}>{props.successCount}</div>
+
+        {/* 一つ前のカウンター値（値が変化したときのアニメーション用要素） */}
+        {props.successCount > 0 ? <div className={cls.beforeValue}>{props.successCount - 1}</div> : <div></div>}
       </div>
-
     </div>
-  )
-}
+  );
+};

@@ -8,9 +8,6 @@ export interface TitleState {
   // 練習レベル
   practiceLevel: number;
 
-  // ミュート（true: ミュート中、false: ミュート解除中）
-  soundMuting: boolean;
-
   // ダイアログの表示有無（true: 表示中、false: 非表示）
   openedDialog: boolean;
 }
@@ -20,7 +17,6 @@ export interface TitleState {
 // --------------------------------------------
 export const titleInitialState: TitleState = {
   practiceLevel: 1,
-  soundMuting: true,
   openedDialog: false,
 };
 

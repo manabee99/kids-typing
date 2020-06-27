@@ -1,9 +1,12 @@
-import "./EffectLayer.css";
 import React from "react";
+
+import '../common/KidsTypingCommon.css';
+import "./EffectLayer.css";
+
 import { CharacterState } from '../../store/reducers/TypingEngineReducer';
 
 // --------------------------------------------
-// ミス用のエフェクトComponent
+// 「文字」のカーソル用のエフェクトComponent
 // --------------------------------------------
 interface OwnProps {
   characterStateList: CharacterState[];
@@ -11,8 +14,9 @@ interface OwnProps {
 
 type EFInputCursorProps = OwnProps;
 export const EfInputCursor: React.FC<EFInputCursorProps> = (props) => {
+
   if (props.characterStateList.length === 0) {
-    return <div key="ef-input-cursor"></div>;
+    return <div></div>;
   }
 
   return (

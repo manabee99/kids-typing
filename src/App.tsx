@@ -10,9 +10,9 @@ const App: React.FC = (props) => {
       <BrowserRouter>
         <Switch>
 
-          {/* タイトルページ */}
+          {/* タイトルページ（練習後に戻った時）*/}
           <Route
-            path="/kids-typing/title"
+            path="/kids-typing/title/:soundMuting"
             component={TitlePageContainer}
           ></Route>
 

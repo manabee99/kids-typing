@@ -1,5 +1,7 @@
+import React from 'react';
+
+import '../../../../../common/KidsTypingCommon.css';
 import '../../../PracticePageForm.css';
-import React from "react";
 
 // --------------------------------------------
 // タイプ練習の文字（桜）Component
@@ -26,17 +28,14 @@ interface OwnProps {
 
 type CharacterSakuraProps = OwnProps;
 export const CharacterSakura: React.FC<CharacterSakuraProps> = (props) => {
-
   return (
     <div
-      className={
-        'character-base character-tetal ' +
-        ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')
-      }
+      key={'sakura' + props.componentId}
+      // ゼロとＯを区別するために数字は文字色を変更するクラスを追加する
+      className={'kt-flex-vertical-center kt-font character-base character-sakura ' + ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')}
       style={{ top: Math.round(props.top), left: Math.round(props.left) }}
     >
       {props.character}
     </div>
   );
-
 };

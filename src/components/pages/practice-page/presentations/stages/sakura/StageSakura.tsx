@@ -19,7 +19,7 @@ type PracticeStageSakuraProps = OwnProps;
 export const PracticeStageSakura: React.FC<PracticeStageSakuraProps> = (props) => {
   const characters: any = [];
   props.characterStateList.forEach((c, idx) => {
-    if (c.componentType === 'sakura') {
+    if (c.practiceCharacterType === 'sakura') {
       // 入力文字の種別が「桜」の場合
       const charCompo = (
         <CharacterSakura
@@ -32,7 +32,7 @@ export const PracticeStageSakura: React.FC<PracticeStageSakuraProps> = (props) =
         ></CharacterSakura>
       );
       characters.push(charCompo);
-    } else if (c.componentType === 'bird') {
+    } else if (c.practiceCharacterType === 'bird') {
       // 入力文字の種別が「小鳥」の場合
       const charCompo = (
         <CharacterBird

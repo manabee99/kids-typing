@@ -31,8 +31,8 @@ export interface CharacterState {
   // コンポーネントID
   componentId: string;
 
-  // コンポーネント種別
-  componentType: string;
+  // 文字の種別
+  practiceCharacterType: PracticeCharacterType;
 
   // 文字
   character: string;
@@ -80,6 +80,15 @@ export interface EffectorState {
 }
 
 // --------------------------------------------
+// 「文字」の種別
+// --------------------------------------------
+const characterTypes = {
+  bird: '1',
+  sakura: '2',
+} as const;
+type PracticeCharacterType = keyof typeof characterTypes; 
+
+// --------------------------------------------
 // 初期状態
 // --------------------------------------------
 export const typingEngineInitialState: TypingEngineState = {
@@ -91,27 +100,15 @@ export const typingEngineInitialState: TypingEngineState = {
   effectIdSequence: 0,
 };
 
-const characterTypeList: string[] = ['sakura', 'bird'];
 export const typingEngineReducer = reducerWithInitialState(typingEngineInitialState)
   // エンジンリセット
   .case(TypingEngineActions.RESET_ENGINE, (state) => {
     return {
       ...state,
-      enabledKeys: [],
-      downedKeys: [],
-      countDownCounter: 5,
       characterStateList: [],
-      previouscharacterStateList: [],
+      effectorStateList: [],
       practiceStartTime: 0,
       practiceTime: 0,
-      openedDialog: false,
-    };
-  })
-  // カウントダウン
-  .case(TypingEngineActions.COUNT_DOWN, (state) => {
-    return {
-      ...state,
-      // remainingTime: state.remainingTime > 0 ? state.remainingTime - 1 : 0,
     };
   })
   // 練習開始
@@ -122,50 +119,14 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
       practiceTime: payload.startTime,
     };
   })
-  // 練習終了
-  .case(TypingEngineActions.END_PRACTICE, (state) => {
-    if (true) {
-      return { ...state };
-    }
-    // ステージクリア判定（４回以上間違えるともう一度）
-    // if (state.missCounter > 3) {
-    //   // もう一度
-    // } else {
-    //   // レベルアップ
-    // }
-    return {
-      ...state,
-      practiceStartTime: 0,
-      practiceTime: 0,
-      // practiceLevel: state.missCounter <= 3 ? state.practiceLevel + 1 : state.practiceLevel,
-      // soundEffectList:
-      //   state.missCounter <= 3
-      //     ? Array.from(state.soundEffectList).concat([
-      //         {
-      //           soundEffectId: (state.soundEffectIdSequence + 1).toString(),
-      //           soundStatus: 'PLAYING',
-      //           url: SoundResources.seVoiceGoodJob,
-      //           playStartTime: new Date().getTime(),
-      //         },
-      //       ])
-      //     : Array.from(state.soundEffectList).concat([
-      //         {
-      //           soundEffectId: (state.soundEffectIdSequence + 1).toString(),
-      //           soundStatus: 'PLAYING',
-      //           url: SoundResources.seVoicePity,
-      //           playStartTime: new Date().getTime(),
-      //         },
-      //       ]),
-      // soundEffectIdSequence: state.soundEffectIdSequence + 1,
-    };
-  })
   // 文字発射
   .case(TypingEngineActions.FIRE_CHARACTER, (state, payload) => {
+    const characterTypeList: PracticeCharacterType[] = ['sakura', 'bird'];
     return {
       ...state,
       characterStateList: Array.from(state.characterStateList).concat({
         componentId: (state.componentIdSequence + 1).toString(),
-        componentType: characterTypeList[Math.floor(Math.random() * 2)],
+        practiceCharacterType: characterTypeList[Math.floor(Math.random() * 2)],
         character: payload.character,
         top: 100 + Math.round(Math.random() * 100),
         left: 900,
@@ -174,15 +135,6 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
         characterState: 'init',
       }),
       componentIdSequence: state.componentIdSequence + 1,
-      // soundEffectList: Array.from(state.soundEffectList).concat([
-      //   {
-      //     soundEffectId: (state.soundEffectIdSequence + 1).toString(),
-      //     soundStatus: 'PLAYING',
-      //     url: SoundResources.seFireCharacter,
-      //     playStartTime: new Date().getTime(),
-      //   },
-      // ]),
-      // soundEffectIdSequence: state.soundEffectIdSequence + 1,
     };
   })
   // キー入力
@@ -223,31 +175,6 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
           : state.effectorStateList,
 
       effectIdSequence: state.characterStateList.length > 0 ? state.effectIdSequence + 1 : state.effectIdSequence,
-
-      // missCounter: state.missCounter + (state.characterStateList.length > 0 && state.characterStateList[0].character !== payload.character ? 1 : 0),
-      // successCounter:
-      //   state.successCounter + (state.characterStateList.length > 0 && state.characterStateList[0].character === payload.character ? 1 : 0),
-      // soundEffectList:
-      //   state.characterStateList.length > 0
-      //     ? state.characterStateList[0].character === payload.character
-      //       ? Array.from(state.soundEffectList).concat([
-      //           {
-      //             soundEffectId: (state.soundEffectIdSequence + 1).toString(),
-      //             soundStatus: 'PLAYING',
-      //             url: SoundResources.seSuccess,
-      //             playStartTime: new Date().getTime(),
-      //           },
-      //         ])
-      //       : Array.from(state.soundEffectList).concat([
-      //           {
-      //             soundEffectId: (state.soundEffectIdSequence + 1).toString(),
-      //             soundStatus: 'PLAYING',
-      //             url: SoundResources.seMiss,
-      //             playStartTime: new Date().getTime(),
-      //           },
-      //         ])
-      //     : state.soundEffectList,
-      // soundEffectIdSequence: state.soundEffectIdSequence + 1,
     };
   })
 
@@ -256,93 +183,53 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
     const nowTime = new Date().getTime();
     return {
       ...state,
-      // remainingTime: state.practiceTime - Math.round((nowTime - state.practiceStartTime) / 1000),
-
       characterStateList: Array.from(state.characterStateList)
         .filter((c) => c.characterState !== 'terminate')
         .filter((c) => c.left >= -100)
         .map((c) => ({
           ...c,
-          // characterState: 'disp',
-          top: tickCharacterTop(c.componentType, c.top, c.YAcceleration),
-          left: tickCharacterLeft(c.componentType, c.left, c.XAcceleration),
-          YAcceleration: tickCharacterYAcceleration(c.componentType, c.characterState, c.top, c.YAcceleration),
-          XAcceleration: tickCharacterXAcceleration(c.componentType, c.characterState, c.top, c.YAcceleration),
+          // 文字の位置を算出する（縦方向）
+          top: tickCharacterTop(c.practiceCharacterType, c.top, c.YAcceleration),
+          // 文字の位置を算出する（横方向）
+          left: tickCharacterLeft(c.practiceCharacterType, c.left, c.XAcceleration),
+          // 文字の速度を算出する（縦方向）
+          YAcceleration: tickCharacterYAcceleration(c.practiceCharacterType, c.top, c.YAcceleration),
+          // 文字の速度を算出する（横方向）
+          XAcceleration: tickCharacterXAcceleration(c.practiceCharacterType, c.left, c.XAcceleration),
         })),
 
       effectorStateList:
         state.effectorStateList.findIndex((ef) => nowTime - ef.startTime >= 5000) !== -1
           ? Array.from(state.effectorStateList).filter((ef) => nowTime - ef.startTime < 5000)
           : state.effectorStateList,
-
-      // soundEffectList:
-      //   state.soundEffectList.findIndex((se) => nowTime - se.playStartTime >= 3000) !== -1
-      //     ? Array.from(state.soundEffectList).filter((se) => nowTime - se.playStartTime < 3000)
-      //     : state.soundEffectList,
     };
   })
-
-  // 入力失敗の判定
-  .case(TypingEngineActions.TICK_NOT_ENTERED, (state) => {
-    const nowTime = new Date().getTime();
-    return {
-      ...state,
-
-      // missCounter: state.characterStateList.length > 0 && state.characterStateList[0].left <= -100 ? state.missCounter + 1 : state.missCounter,
-
-      effectorStateList:
-        state.characterStateList.length > 0 && state.characterStateList[0].left <= -100
-          ? Array.from(state.effectorStateList).concat([
-              {
-                effectId: (state.effectIdSequence + 1).toString(),
-                effectType: 'InputMiss',
-                top: state.characterStateList[0].top,
-                left: state.characterStateList[0].left,
-                XAcceleration: state.characterStateList[0].XAcceleration,
-                YAcceleration: state.characterStateList[0].YAcceleration,
-                startTime: new Date().getTime(),
-              },
-            ])
-          : state.effectorStateList,
-
-      effectIdSequence:
-        state.characterStateList.length > 0 && state.characterStateList[0].left <= -100 ? state.effectIdSequence + 1 : state.effectIdSequence,
-
-      // soundEffectList:
-      //   state.characterStateList.length > 0 && state.characterStateList[0].left <= -100
-      //     ? Array.from(state.soundEffectList).concat([
-      //         {
-      //           soundEffectId: (state.soundEffectIdSequence + 1).toString(),
-      //           soundStatus: 'PLAYING',
-      //           url: SoundResources.seMiss,
-      //           playStartTime: new Date().getTime(),
-      //         },
-      //       ])
-      //     : state.soundEffectList,
-
-      // soundEffectIdSequence:
-      //   state.characterStateList.length > 0 && state.characterStateList[0].left <= -100
-      //     ? state.soundEffectIdSequence + 1
-      //     : state.soundEffectIdSequence,
-    };
-  });
 
 // --------------------------------------------
 // 文字の位置算出関数
 // --------------------------------------------
 
-function tickCharacterTop(characterType: string, top: number, yAcceleration: number): number {
+/**
+ * 文字の位置を算出する（横方向に移動する）
+ * @param characterType 文字の種別
+ * @param top 現在の位置
+ * @param yAcceleration 縦方向の移動速度
+ */
+function tickCharacterTop(characterType: PracticeCharacterType, top: number, yAcceleration: number): number {
   switch (characterType) {
     case 'sakura':
-      return Math.round(top + yAcceleration);
-
     case 'bird':
       return Math.round(top + yAcceleration);
   }
-  return top;
 }
 
-function tickCharacterLeft(characterType: string, left: number, xAcceleration: number): number {
+/**
+ * 文字の位置を算出する（縦方向に移動する）
+ * @param characterType 文字の種別
+ * @param left 現在の位置
+ * @param xAcceleration 横方向の移動速度
+ */
+function tickCharacterLeft(characterType: PracticeCharacterType, left: number, xAcceleration: number): number {
   switch (characterType) {
     case 'sakura':
       return Math.round(left + xAcceleration / 1.3);
@@ -353,13 +240,17 @@ function tickCharacterLeft(characterType: string, left: number, xAcceleration: n
   return Math.round(left + xAcceleration);
 }
 
-function tickCharacterYAcceleration(characterType: string, characterState: string, top: number, yAcceleration: number): number {
-  if (characterState === 'correct') {
-    return 10;
-  }
-
+/**
+ * 文字の縦方向の移動速度を算出する
+ * @param characterType 文字の種別
+ * @param characterState 文字の状態
+ * @param top 現在の位置
+ * @param yAcceleration 現在の移動速度
+ */
+function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: number, yAcceleration: number): number {
   switch (characterType) {
     case 'sakura':
+      // ランダム上下するが突然向きが逆転しないように制御する
       var acc = yAcceleration + (0.5 - Math.random() * 1);
       if (acc > 1.0) {
         acc = 1.0;
@@ -370,15 +261,19 @@ function tickCharacterYAcceleration(characterType: string, characterState: strin
       return acc;
 
     case 'bird':
+      // ランダム上下する
       return 2 - Math.random() * 4;
   }
   return 1;
 }
 
-function tickCharacterXAcceleration(characterType: string, characterState: string, left: number, xAcceleration: number): number {
-  if (characterState === 'correct') {
-    return -10;
-  }
-
+/**
+ * 文字の横方向の移動速度を算出する
+ * @param characterType 文字の種別
+ * @param characterState 文字の状態
+ * @param left 現在の位置
+ * @param xAcceleration 現在の移動速度
+ */
+function tickCharacterXAcceleration(characterType: PracticeCharacterType, left: number, xAcceleration: number): number {
   return -2;
 }

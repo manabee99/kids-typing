@@ -39,7 +39,7 @@
 /* ------------------------------------------- */
 .ef-miss {
   position: absolute;
-  border: var(-kt-ef-miss-animation-border);
+  border: var(--kt-ef-miss-animation-border);
   border-radius: 50%;
   opacity: 0.0;
   animation: 0.4s ease-out animation-ef-miss;

@@ -181,9 +181,6 @@ function endPractice(): void {
   // 練習レベルをweb storageに保存する
   store.dispatch(TitleActions.UPDATE_PRACTICE_LEVEL());
 
-  // キータイプエンジンの練習終了
-  store.dispatch(TypingEngineActions.END_PRACTICE());
-
   // 練習メインループ用のインターバルをクリア
   clearInterval(intervalHandle);
 
@@ -213,8 +210,15 @@ function main(fps: number, fireInterval: number, practiceCharacter: string[]) {
   store.dispatch(HeaderActions.UPDATE_REMAINING_TIME({ remainingTime: remainingTime }));
 
   // 時間を進める
-  store.dispatch(TypingEngineActions.TICK_NOT_ENTERED());
   store.dispatch(TypingEngineActions.TICK());
+
+  // 入力が間に合わなかった「文字」に対して入力失敗を発生させる
+  if (store.getState().typingEngineState.characterStateList.length > 0 && store.getState().typingEngineState.characterStateList[0].left <= -100) {
+    console.log(store.getState().typingEngineState.characterStateList[0].left);
+    store.dispatch(TypingEngineActions.INPUT_CHARACTER({ character: '' }));
+    store.dispatch(HeaderActions.ADD_MISS_COUNTER());
+    store.dispatch(SoundActions.PLAYING_SOUND_EFFECT({ soundUrl: SoundResources.seMiss }));
+  }
 
   // 「文字」出力間隔に達した場合は「文字」を出力する
   if (cnt * (1000 / fps) > fireInterval) {

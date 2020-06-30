@@ -56,6 +56,9 @@
   /* 残り時間の値の文字色 */
   --kt-remaining-time-color: #1cc006;
 
+  /* 「文字」の文字色 */
+  --kt-character: #5ad14f;
+
   /* 「文字」が数字であるときの文字色 */
   --kt-character-number: #0080ff;
 
@@ -164,6 +167,13 @@
   font-weight: 900;
   text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
   -webkit-text-stroke: 1px rgba(0, 0, 0, 1);
+}
+
+/* 標準の白ストローク */
+.kt-font-white {
+  font-weight: 900;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 1);
 }
 
 /* ストロークが太い文字 */

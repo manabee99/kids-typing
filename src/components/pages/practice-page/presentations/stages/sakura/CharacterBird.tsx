@@ -32,7 +32,7 @@ export const CharacterBird: React.FC<CharacterBirdProps> = (props) => {
     <div
       key={'bird' + props.componentId}
       // ゼロとＯを区別するために数字は文字色を変更するクラスを追加する
-      className={'kt-flex-vertical-center kt-font character-base character-bird ' + ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')}
+      className={'kt-flex-vertical-center kt-font-white character-base character-bird ' + ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')}
       style={{ top: Math.round(props.top), left: Math.round(props.left) }}
     >
       {props.character}

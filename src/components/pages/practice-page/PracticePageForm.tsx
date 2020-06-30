@@ -16,6 +16,8 @@ import { PracticeEndAnimation } from './presentations/PracticeEndAnimation';
 import { Keyboard } from './presentations/keyboard/Keyboard';
 import { CharacterState, EffectorState } from '../../../store/reducers/TypingEngineReducer';
 import { SoundStatus } from '../../../store/reducers/SoundReducer';
+import { PracticeStageType } from '../../../store/actions/TypingEngineAction';
+import { PracticeStageSunflower } from './presentations/stages/sunflower/StageSunflower';
 
 // --------------------------------------------
 // 練習ページコンテナから受け取るパラメータの定義
@@ -39,6 +41,9 @@ interface OwnProps {
 
   // 押下中のキー
   downedKeys: string[];
+
+  // 練習ステージ種別
+  practiceStageType: PracticeStageType;
 
   // 練習レベル
   practiceLevel: number;
@@ -152,7 +157,13 @@ export class PracticePageForm extends React.Component<Props> {
             {/* 練習ステージ全体 */}
             <div style={{ position: 'relative' }}>
               {/* 練習ステージ */}
-              <PracticeStageSakura characterStateList={this.props.characterStateList}></PracticeStageSakura>
+              {this.props.practiceStageType === 'sakura' ? (
+                <PracticeStageSakura characterStateList={this.props.characterStateList}></PracticeStageSakura>
+              ) : this.props.practiceStageType === 'sunflower' ? (
+                <PracticeStageSunflower characterStateList={this.props.characterStateList}></PracticeStageSunflower>
+              ) : (
+                <div></div>
+              )}
 
               {/* 練習開始アニメーション*/}
               <PracticeStartAnimation animationEnd={this.onAnimationEnd.bind(this)}></PracticeStartAnimation>

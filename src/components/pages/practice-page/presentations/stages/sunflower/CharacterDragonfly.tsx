@@ -4,7 +4,7 @@ import '../../../../../common/KidsTypingCommon.css';
 import '../../../PracticePageForm.css';
 
 // --------------------------------------------
-// タイプ練習の文字（桜）Component
+// タイプ練習の文字（とんぼ）Component
 // --------------------------------------------
 interface OwnProps {
   // コンポーネントID
@@ -26,13 +26,13 @@ interface OwnProps {
   isHead: boolean;
 }
 
-type CharacterSakuraProps = OwnProps;
-export const CharacterSakura: React.FC<CharacterSakuraProps> = (props) => {
+type CharacterDragonflyProps = OwnProps;
+export const CharacterDragonfly: React.FC<CharacterDragonflyProps> = (props) => {
   return (
     <div
-      key={'sakura' + props.componentId}
+      key={'dragonfly' + props.componentId}
       // ゼロとＯを区別するために数字は文字色を変更するクラスを追加する
-      className={'kt-flex-vertical-center kt-font-white character-base character-sakura ' + ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')}
+      className={'kt-flex-vertical-center kt-font-white character-base character-dragonfly ' + ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')}
       style={{ top: Math.round(props.top), left: Math.round(props.left) }}
     >
       {props.character}

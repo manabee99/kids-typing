@@ -4,7 +4,10 @@ export const SoundResources = {
   // bgmStageStart: require('./sounds/bgm-stage-start@suisougakubunonatsu.mp3'),
   bgmTitle: require('./sounds/bgm-title@happytime.mp3'),
   // bgmStageStart: require('./sounds/bgm-stage-start@sanjinooyatsu.mp3'),  
-  bgmStagesakura: require('./sounds/bgm-stage-sakura@sanjinooyatsu.mp3'),
+  bgmStageSakura: require('./sounds/bgm-stage-sakura@sanjinooyatsu.mp3'),
+  // 
+  bgmStageSunflower: require('./sounds/bgm-stage-sunflower@lovelyflower.mp3'),
+  
   bgmStageEnd: require('./sounds/bgm-stage-end@nichinichikorekoujitsu.mp3'),
   
   seTitleStart: require('./sounds/se-title-start.mp3'),

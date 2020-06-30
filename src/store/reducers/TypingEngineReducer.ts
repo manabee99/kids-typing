@@ -1,3 +1,4 @@
+import { PracticeStageType, PracticeCharacterType } from './../actions/TypingEngineAction';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { TypingEngineActions } from '../actions/TypingEngineAction';
 
@@ -5,6 +6,12 @@ import { TypingEngineActions } from '../actions/TypingEngineAction';
 // キータイプエンジンの状態
 // --------------------------------------------
 export interface TypingEngineState {
+  // ステージの種類
+  practiceStageType: PracticeStageType;
+
+  // ステージで利用する「文字」の種類
+  useCharacterTypes: PracticeCharacterType[];
+
   // タイプ練習の「文字」状態リスト
   characterStateList: CharacterState[];
 
@@ -78,20 +85,12 @@ export interface EffectorState {
   // エフェクト開始時間
   startTime: number;
 }
-
-// --------------------------------------------
-// 「文字」の種別
-// --------------------------------------------
-const characterTypes = {
-  bird: '1',
-  sakura: '2',
-} as const;
-type PracticeCharacterType = keyof typeof characterTypes; 
-
 // --------------------------------------------
 // 初期状態
 // --------------------------------------------
 export const typingEngineInitialState: TypingEngineState = {
+  practiceStageType: 'sakura',
+  useCharacterTypes: [],
   characterStateList: [],
   effectorStateList: [],
   practiceStartTime: 0,
@@ -101,6 +100,20 @@ export const typingEngineInitialState: TypingEngineState = {
 };
 
 export const typingEngineReducer = reducerWithInitialState(typingEngineInitialState)
+  // ステージ設定
+  .case(TypingEngineActions.SELECTED_PRACTICE_STAGE, (state, payload) => {
+    return {
+      ...state,
+      practiceStageType: payload.stageType,
+    };
+  })
+  // ステージで利用する文字種別設定
+  .case(TypingEngineActions.SELECTED_CHARACTER_TYPE, (state, payload) => {
+    return {
+      ...state,
+      useCharacterTypes: payload.characterTypes
+    };
+  })
   // エンジンリセット
   .case(TypingEngineActions.RESET_ENGINE, (state) => {
     return {
@@ -121,12 +134,11 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
   })
   // 文字発射
   .case(TypingEngineActions.FIRE_CHARACTER, (state, payload) => {
-    const characterTypeList: PracticeCharacterType[] = ['sakura', 'bird'];
     return {
       ...state,
       characterStateList: Array.from(state.characterStateList).concat({
         componentId: (state.componentIdSequence + 1).toString(),
-        practiceCharacterType: characterTypeList[Math.floor(Math.random() * 2)],
+        practiceCharacterType: state.useCharacterTypes[Math.floor(Math.random() * state.useCharacterTypes.length)],
         character: payload.character,
         top: 100 + Math.round(Math.random() * 100),
         left: 900,
@@ -203,7 +215,7 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
           ? Array.from(state.effectorStateList).filter((ef) => nowTime - ef.startTime < 5000)
           : state.effectorStateList,
     };
-  })
+  });
 
 // --------------------------------------------
 // 文字の位置算出関数
@@ -219,6 +231,8 @@ function tickCharacterTop(characterType: PracticeCharacterType, top: number, yAc
   switch (characterType) {
     case 'sakura':
     case 'bird':
+    case 'dragonfly':
+    case 'ladybird':
       return Math.round(top + yAcceleration);
   }
 }
@@ -236,6 +250,12 @@ function tickCharacterLeft(characterType: PracticeCharacterType, left: number, x
 
     case 'bird':
       return Math.round(left + xAcceleration);
+
+    case 'dragonfly':
+      return Math.round(left + xAcceleration);
+
+    case 'ladybird':
+      return Math.round(left + xAcceleration / 1.3);
   }
   return Math.round(left + xAcceleration);
 }
@@ -261,6 +281,8 @@ function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: n
       return acc;
 
     case 'bird':
+    case 'dragonfly':
+    case 'ladybird':
       // ランダム上下する
       return 2 - Math.random() * 4;
   }

@@ -502,14 +502,58 @@
 /* ------------------------------------------- */
 
 /* ステージ「ひまわり」の枠 */
-.practice-stage-himawari-frame {
-  width: 1000px;
+.practice-stage-sunflower-frame {
+  position: relative;
+  width: 980px;
   height: 600px;
-  display: flex;
-  flex-direction: row;
-  background-image: url(../../../images/background-sakura.png);
+  overflow: hidden;
+  margin: 5px 10px 5px 10px;
+  background-image: url(../../../images/background-sunflower.png);
   background-size: 100%;
   background-repeat: no-repeat;
+}
+
+/* 「文字」の種別が「とんぼ」の画像とアニメーション */
+.character-dragonfly {
+  background: center/80% no-repeat url('../../../images/character-dragonfly.png');
+  animation: 2s ease-in infinite animation-character-dragonfly;
+  transform-origin: center center;
+}
+@keyframes animation-character-dragonfly {
+  0% {
+    transform: rotate(0deg) rotate3d(1, 0, 0, 0deg);
+  }
+  25% {
+    transform: rotate(20deg) rotate3d(1, 0, 0, 360deg);
+  }
+  75% {
+    transform: rotate(-20deg) rotate3d(1, 0, 0, 360deg);
+  }
+  100% {
+    transform: rotate(0deg) rotate3d(1, 0, 0, 360deg);
+  }
+}
+
+/* 「文字」の種別が「てんとうむし」の画像とアニメーション */
+.character-ladybird {
+  background: center/100% no-repeat url('../../../images/character-ladybird.png');
+  animation: 2s ease-in infinite animation-character-ladybird;
+  transform-origin: center center;
+  padding-left: 20px;
+}
+@keyframes animation-character-ladybird {
+  0% {
+    transform: perspective(500px) translate3d(0px, 0px, 0px);
+  }
+  25% {
+    transform: perspective(500px) translate3d(0px, 0px, 200px);
+  }
+  50% {
+    transform: perspective(500px) translate3d(0px, 0px, -200px);
+  }
+  100% {
+    transform: perspective(500px) translate3d(0px, 0px, 0px);
+  }
 }
 
 /* ------------------------------------------- */
@@ -552,7 +596,7 @@
   width: 200px;
   height: 200px;
   font-size: 80px;
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--kt-character);
 }
 
 /* 「文字」が数字である場合の文字色 */

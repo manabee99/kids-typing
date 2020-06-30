@@ -1,3 +1,4 @@
+import { PracticeStageType, PracticeCharacterType } from './../store/actions/TypingEngineAction';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { PracticePageForm } from '../components/pages/practice-page/PracticePageForm';
@@ -20,6 +21,9 @@ const mapStateToProps = (appState: AppState) => {
 
     // 残り時間
     remainingTime: appState.headerState.remainingTime,
+
+    // 練習ステージの種別
+    practiceStageType: appState.typingEngineState.practiceStageType,
 
     // タイプ練習の「文字」状態リスト
     characterStateList: appState.typingEngineState.characterStateList,
@@ -73,6 +77,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     // キーアップ
     keyUp: (key: string) => dispatch(KeyboardActions.KEY_UP({ key: key })),
 
+    // ステージ設定
+    selectStage: (practiceStageType: PracticeStageType) => dispatch(TypingEngineActions.SELECTED_PRACTICE_STAGE({ stageType: practiceStageType })),
+
     // ステージ初期化
     initilizeStage: () => initializeStage(),
 
@@ -104,6 +111,12 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PracticeP
 function initializeStage(): void {
   // 現在のレベルをもとにステージ定義を取得する
   const stageConfig = getStageConfig(store.getState().titleState.practiceLevel);
+
+  // ステージ種別を選択する
+  store.dispatch(TypingEngineActions.SELECTED_PRACTICE_STAGE({stageType: stageConfig.stageType }));
+
+  // ステージで利用する文字種別を選択する
+  store.dispatch(TypingEngineActions.SELECTED_CHARACTER_TYPE({characterTypes: stageConfig.useCharacterTypes }));
 
   // ステージ毎のBGMを設定する
   store.dispatch(SoundActions.CHANGED_BGM({ bgmUrl: stageConfig.backgroundMusic }));
@@ -264,7 +277,10 @@ function createPracticeCaracters(characterCount: number, sourceCharacter: string
 // ステージ設定
 export interface StageConfig {
   // ステージ種別
-  stageType: string;
+  stageType: PracticeStageType;
+
+  // 利用する文字種別
+  useCharacterTypes: PracticeCharacterType[];
 
   // BGM
   backgroundMusic: string;
@@ -287,111 +303,127 @@ function getStageConfig(practiceLevel: number): StageConfig {
   const stateConfig: StageConfig[] = [
     {
       stageType: 'sakura',
-      backgroundMusic: SoundResources.bgmStagesakura,
+      useCharacterTypes: ['bird', 'sakura'],
+      backgroundMusic: SoundResources.bgmStageSunflower,
       enabledKeys: 'DFJK',
       importantKeys: '',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     {
-      stageType: 'sakura',
-      backgroundMusic: SoundResources.bgmStagesakura,
+      stageType: 'sunflower',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
+      backgroundMusic: SoundResources.bgmStageSakura,
       enabledKeys: 'SDFJKL',
       importantKeys: 'SL',
       fireInterval: 2000,
     },
     {
       stageType: 'sakura',
-      backgroundMusic: SoundResources.bgmStagesakura,
+      useCharacterTypes: ['bird', 'sakura'],
+      backgroundMusic: SoundResources.bgmStageSakura,
       enabledKeys: 'ASDFGHJKL',
       importantKeys: 'GH',
       fireInterval: 2000,
     },
     {
       stageType: 'sakura',
-      backgroundMusic: SoundResources.bgmStagesakura,
+      useCharacterTypes: ['bird', 'sakura'],
+      backgroundMusic: SoundResources.bgmStageSakura,
       enabledKeys: 'RUASDFGHJKL',
       importantKeys: 'RU',
       fireInterval: 2000,
     },
     {
-      stageType: 'himawari',
+      stageType: 'sunflower',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: 'ERUIASDFGHJKL',
       importantKeys: 'EI',
       fireInterval: 1000,
     },
     {
-      stageType: 'himawari',
+      stageType: 'sunflower',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: 'WERUIOASDFGHJKL',
       importantKeys: 'WO',
       fireInterval: 1000,
     },
     {
-      stageType: 'himawari',
+      stageType: 'sunflower',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: 'QWERUIOPASDFGHJKL',
       importantKeys: 'QP',
       fireInterval: 1000,
     },
     {
-      stageType: 'himawari',
+      stageType: 'sunflower',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: 'QWERTYUIOPASDFGHJKL',
       importantKeys: 'TY',
       fireInterval: 1000,
     },
     {
-      stageType: 'kingyo',
+      stageType: 'goldfish',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: 'QWERTYUIOPASDFGHJKLVN',
       importantKeys: 'VN',
       fireInterval: 1000,
     },
     {
-      stageType: 'kingyo',
+      stageType: 'goldfish',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: 'QWERTYUIOPASDFGHJKLCVNM',
       importantKeys: 'CM',
       fireInterval: 1000,
     },
     {
-      stageType: 'kingyo',
+      stageType: 'goldfish',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: 'QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: 'ZX',
       fireInterval: 1000,
     },
     {
-      stageType: 'kingyo',
+      stageType: 'goldfish',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: '57QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '57',
       fireInterval: 1000,
     },
     {
-      stageType: 'hanabi',
+      stageType: 'fireworks',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: '4578QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '48',
       fireInterval: 1000,
     },
     {
-      stageType: 'hanabi',
+      stageType: 'fireworks',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: '345789QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '39',
       fireInterval: 1000,
     },
     {
-      stageType: 'hanabi',
+      stageType: 'fireworks',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: '23457890QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '20',
       fireInterval: 1000,
     },
     {
-      stageType: 'hanabi',
+      stageType: 'fireworks',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '1',
@@ -399,6 +431,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
     },
     {
       stageType: 'halloween',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '1',
@@ -406,6 +439,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
     },
     {
       stageType: 'halloween',
+      useCharacterTypes: ['dragonfly', 'ladybird'],
       backgroundMusic: '',
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '1',

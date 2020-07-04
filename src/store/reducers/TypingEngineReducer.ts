@@ -111,7 +111,7 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
   .case(TypingEngineActions.SELECTED_CHARACTER_TYPE, (state, payload) => {
     return {
       ...state,
-      useCharacterTypes: payload.characterTypes
+      useCharacterTypes: payload.characterTypes,
     };
   })
   // エンジンリセット
@@ -134,13 +134,23 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
   })
   // 文字発射
   .case(TypingEngineActions.FIRE_CHARACTER, (state, payload) => {
+
+    // 文字をランダムに選択する
+    var characterType = state.useCharacterTypes[Math.floor(Math.random() * state.useCharacterTypes.length)];
+
+    // サメは一匹だけしか出さない
+    const hasShake = state.characterStateList.filter( c => c.practiceCharacterType === 'shark');
+    while(hasShake.length > 0 && characterType === 'shark') {
+      characterType = state.useCharacterTypes[Math.floor(Math.random() * state.useCharacterTypes.length)];
+    }
+
     return {
       ...state,
       characterStateList: Array.from(state.characterStateList).concat({
         componentId: (state.componentIdSequence + 1).toString(),
-        practiceCharacterType: state.useCharacterTypes[Math.floor(Math.random() * state.useCharacterTypes.length)],
+        practiceCharacterType: characterType,
         character: payload.character,
-        top: 100 + Math.round(Math.random() * 100),
+        top:  characterType === 'shark' ? 400 : 100 + Math.round(Math.random() * 100),
         left: 900,
         XAcceleration: -2,
         YAcceleration: 0,
@@ -233,7 +243,14 @@ function tickCharacterTop(characterType: PracticeCharacterType, top: number, yAc
     case 'bird':
     case 'dragonfly':
     case 'ladybird':
+    case 'goldfish':
+    case 'blackfish':
+    case 'turtle':
+    case 'octopus':
+    case 'blowfish':
       return Math.round(top + yAcceleration);
+    case 'shark':
+      return top;
   }
 }
 
@@ -246,16 +263,15 @@ function tickCharacterTop(characterType: PracticeCharacterType, top: number, yAc
 function tickCharacterLeft(characterType: PracticeCharacterType, left: number, xAcceleration: number): number {
   switch (characterType) {
     case 'sakura':
-      return Math.round(left + xAcceleration / 1.3);
-
     case 'bird':
-      return Math.round(left + xAcceleration);
-
     case 'dragonfly':
-      return Math.round(left + xAcceleration);
-
     case 'ladybird':
-      return Math.round(left + xAcceleration / 1.3);
+    case 'goldfish':
+    case 'blackfish':
+    case 'turtle':
+    case 'octopus':
+    case 'blowfish':
+    case 'shark':
   }
   return Math.round(left + xAcceleration);
 }
@@ -270,6 +286,10 @@ function tickCharacterLeft(characterType: PracticeCharacterType, left: number, x
 function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: number, yAcceleration: number): number {
   switch (characterType) {
     case 'sakura':
+    case 'goldfish':
+    case 'blackfish':
+    case 'turtle':
+    case 'blowfish':
       // ランダム上下するが突然向きが逆転しないように制御する
       var acc = yAcceleration + (0.5 - Math.random() * 1);
       if (acc > 1.0) {
@@ -285,6 +305,20 @@ function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: n
     case 'ladybird':
       // ランダム上下する
       return 2 - Math.random() * 4;
+
+    case 'octopus':
+      // 激しくランダムに上下するが突然向きが逆転しないように制御する
+      var acc = yAcceleration + (0.5 - Math.random() * 1);
+      if (acc > 2.0) {
+        acc = 2.0;
+      }
+      if (acc < -1.0) {
+        acc = -1.0;
+      }
+      return acc;
+    case 'shark':
+      // 上下には移動しない
+      return 0;
   }
   return 1;
 }

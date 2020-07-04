@@ -5,8 +5,9 @@ export const SoundResources = {
   bgmTitle: require('./sounds/bgm-title@happytime.mp3'),
   // bgmStageStart: require('./sounds/bgm-stage-start@sanjinooyatsu.mp3'),  
   bgmStageSakura: require('./sounds/bgm-stage-sakura@sanjinooyatsu.mp3'),
-  // 
   bgmStageSunflower: require('./sounds/bgm-stage-sunflower@lovelyflower.mp3'),
+  bgmStageGoldfish: require('./sounds/bgm-stage-goldfish@retropark.mp3'),
+  bgmStageSeabed: require('./sounds/bgm-stage-seabed@retrogamecenter2.mp3'),
   
   bgmStageEnd: require('./sounds/bgm-stage-end@nichinichikorekoujitsu.mp3'),
   

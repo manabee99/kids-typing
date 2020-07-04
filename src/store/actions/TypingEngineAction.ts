@@ -35,7 +35,7 @@ const practiceStageTypes = {
   sakura: '1',
   sunflower: '2',
   goldfish: '3',
-  fireworks: '4',
+  seabed: '4',
   halloween: '5',
 } as const;
 export type PracticeStageType = keyof typeof practiceStageTypes;
@@ -48,6 +48,12 @@ const characterTypes = {
   sakura: '2',
   dragonfly: '3',
   ladybird: '4',
+  goldfish: '5',
+  blackfish: '6',
+  turtle: '7',
+  octopus: '8',
+  blowfish: '9',
+  shark: '10',
 } as const;
 export type PracticeCharacterType = keyof typeof characterTypes;
 

@@ -18,6 +18,8 @@ import { CharacterState, EffectorState } from '../../../store/reducers/TypingEng
 import { SoundStatus } from '../../../store/reducers/SoundReducer';
 import { PracticeStageType } from '../../../store/actions/TypingEngineAction';
 import { PracticeStageSunflower } from './presentations/stages/sunflower/StageSunflower';
+import { PracticeStageGoldfish } from './presentations/stages/goldfish/StageGoldfish';
+import { PracticeStageSeabed } from './presentations/stages/seabed/StageSeabed';
 
 // --------------------------------------------
 // 練習ページコンテナから受け取るパラメータの定義
@@ -161,6 +163,10 @@ export class PracticePageForm extends React.Component<Props> {
                 <PracticeStageSakura characterStateList={this.props.characterStateList}></PracticeStageSakura>
               ) : this.props.practiceStageType === 'sunflower' ? (
                 <PracticeStageSunflower characterStateList={this.props.characterStateList}></PracticeStageSunflower>
+              ) : this.props.practiceStageType === 'goldfish' ? (
+                <PracticeStageGoldfish characterStateList={this.props.characterStateList}></PracticeStageGoldfish>
+              ) : this.props.practiceStageType === 'seabed' ? (
+                <PracticeStageSeabed characterStateList={this.props.characterStateList}></PracticeStageSeabed>
               ) : (
                 <div></div>
               )}

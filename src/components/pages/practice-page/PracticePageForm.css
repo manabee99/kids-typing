@@ -561,15 +561,178 @@
 /* ------------------------------------------- */
 
 /* ステージ「金魚」の枠 */
-.practice-stage-kingyo-frame {
-  width: 1000px;
+.practice-stage-goldfish-frame {
+  position: relative;
+  width: 980px;
   height: 600px;
-  display: flex;
-  flex-direction: row;
-  background-image: url(../../../images/background-sakura.png);
+  overflow: hidden;
+  margin: 5px 10px 5px 10px;
+  background-image: url(../../../images/background-goldfish.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
 }
+
+/* 「文字」の種別が「金魚」の画像とアニメーション */
+.character-goldfish {
+  background: center/80% no-repeat url('../../../images/character-goldfish.png');
+  animation: 1.5s ease-in-out infinite animation-character-goldfish;
+  transform-origin: center center;
+}
+@keyframes animation-character-goldfish {
+  0% {
+    transform: rotate(0deg) ;
+  }
+  20% {
+    transform: rotate(40deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-40deg) ;
+  }
+  80% {
+    transform: rotate(-20deg) ;
+  }
+  100% {
+    transform: rotate(0deg) ;
+  }
+}
+
+/* 「文字」の種別が「出目金」の画像とアニメーション */
+.character-blackfish {
+  background: center/100% no-repeat url('../../../images/character-blackfish.png');
+  animation: 3s ease-in infinite animation-character-blackfish;
+  transform-origin: center center;
+  padding-left: 20px;
+}
+@keyframes animation-character-blackfish {
+  0% {
+    transform: perspective(200px) translate3d(0px, 0px, 0px) rotate(0deg);
+  }
+  25% {
+    transform: perspective(200px) translate3d(0px, 0px, 20px) rotate(40deg);
+  }
+  50% {
+    transform: perspective(200px) translate3d(0px, 0px, -20px) rotate(-20deg);
+  }
+  100% {
+    transform: perspective(200px) translate3d(0px, 0px, 0px) rotate(0deg);
+  }
+}
+
+/* ------------------------------------------- */
+/* ステージ「海底」の定義                        */
+/* ------------------------------------------- */
+
+/* ステージ「海底」の枠 */
+.practice-stage-seabed-frame {
+  position: relative;
+  width: 980px;
+  height: 600px;
+  overflow: hidden;
+  margin: 5px 10px 5px 10px;
+  background-image: url(../../../images/background-seabed.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+/* 「文字」の種別が「亀」の画像とアニメーション */
+.character-turtle {
+  background: center/100% no-repeat url('../../../images/character-turtle.png');
+  animation: 2s ease-in-out infinite animation-character-turtle;
+  transform-origin: center center;
+  width: 300px !important;
+}
+@keyframes animation-character-turtle {
+  0% {
+    transform: perspective(100px) translate3d(0px, 0px, 0px);
+  }
+  25% {
+    transform: perspective(100px) translate3d(0px, 0px, 20px);
+  }
+  50% {
+    transform: perspective(100px) translate3d(0px, 0px, -20px);
+  }
+  100% {
+    transform: perspective(100px) translate3d(0px, 0px, 0px);
+  }
+}
+
+/* 「文字」の種別が「タコ」の画像とアニメーション */
+.character-octopus {
+  background: center/70% no-repeat url('../../../images/character-octopus.png');
+  animation: 3s ease-in infinite animation-character-octopus;
+  transform-origin: center center;
+  padding-left: 20px;
+  /* height: 250px !important; */
+}
+@keyframes animation-character-octopus {
+  0% {
+    transform: scale(1.0, 1.0) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.0, 1.7) rotate(-40deg);
+  }
+  50% {
+    transform: scale(1.0, 0.5) rotate(20deg);
+  }
+  100% {
+    transform: scale(1.0, 1.0) rotate(0deg);
+  }
+}
+
+/* 「文字」の種別が「フグ」の画像とアニメーション */
+.character-blowfish {
+  background: center/70% no-repeat url('../../../images/character-blowfish.png');
+  animation: 4s ease-in-out infinite animation-character-blowfish;
+  transform-origin: center center;
+  width: 250px !important;
+}
+@keyframes animation-character-blowfish {
+  0% {
+    transform: rotate(0deg) ;
+  }
+  20% {
+    transform: rotate(40deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-40deg) ;
+  }
+  80% {
+    transform: rotate(-20deg) ;
+  }
+  100% {
+    transform: rotate(0deg) ;
+  }
+}
+
+/* 「文字」の種別が「サメ」の画像とアニメーション */
+.character-shark {
+  background: center/90% no-repeat url('../../../images/character-shark.png');
+  animation: 3s ease-in-out infinite animation-character-shark;
+  transform-origin: center center;
+  width: 650px !important;
+}
+@keyframes animation-character-shark {
+  0% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg);
+  }
+  25% {
+    transform: perspective(200px) rotate3d(0, 1, 0, -5deg);
+  }
+  50% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 5deg);
+  }
+  100% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg);
+  }
+}
+
+
 
 /* ------------------------------------------- */
 /* ステージ「花火」の定義                        */

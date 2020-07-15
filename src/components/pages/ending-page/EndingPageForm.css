@@ -1,0 +1,72 @@
+/* エンディングページの背景画像（透過させるために別フレームとしている） */
+.ending-page-background {
+  display: flex;
+  background-color: var(--kt-page-background);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+/* エンディングページの背景色（ending-page-backgroundと合わせて利用）*/
+.ending-page-outer-frame {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+/* エンディングページの枠 */
+.ending-page-inner-frame {
+  position: absolute;
+  width: 1080px;
+  height: 768px;
+  top: 10px;
+  background: center/120% no-repeat url('../../../images/background-ending.png');
+  overflow: hidden;
+}
+
+/* エンディングロゴ */
+.ending-logo {
+  font-size: 100px;
+  color: var(--kt-ending-color);
+  transform: translateY(100px);
+  animation: 4s ease-in-out infinite animation-ending-logo;
+}
+
+@keyframes animation-ending-logo {
+  0% {
+    transform: translate(0px, 100px);
+  }
+  33% {
+    transform: translate(0px, -30px);
+  }
+  66% {
+    transform: translate(0px, 300px);
+  }
+  100% {
+    transform: translate(0px, 100px);
+  }
+}
+
+/* エンディングページのアニメーション用フレーム（キャラクターの表示領域） */
+.ending-animation-frame {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  top: 150px;
+  overflow: hidden;
+  z-index: 21;
+}
+
+/* フェードアウトアニメーション */
+.ending-fade-out {
+  animation: 10s ease-in-out ending-fade-out-animation forwards;
+}
+
+@keyframes ending-fade-out-animation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

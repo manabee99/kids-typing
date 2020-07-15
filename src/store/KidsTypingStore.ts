@@ -1,14 +1,16 @@
-import { keyboardReducer, KeyboardState } from './store/reducers/KeyboardReducer';
-import { soundReducer, SoundState } from './store/reducers/SoundReducer';
-import { titleReducer, TitleState } from './store/reducers/TitleReducer';
-import { TypingEngineState, typingEngineReducer } from './store/reducers/TypingEngineReducer';
-import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 
 import thunk from 'redux-thunk';
-import { HeaderState, headerReducer } from './store/reducers/HeaderReducer';
+import { HeaderState, headerReducer } from './reducers/HeaderReducer';
+import { TitleState, titleReducer } from './reducers/TitleReducer';
+import { TypingEngineState, typingEngineReducer } from './reducers/TypingEngineReducer';
+import { KeyboardState, keyboardReducer } from './reducers/KeyboardReducer';
+import { SoundState, soundReducer } from './reducers/SoundReducer';
+import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
+import { endingReducer, EndingState } from './reducers/EndingReducer';
 
 export type AppState = {
   titleState: TitleState;
+  endingState: EndingState;
   typingEngineState: TypingEngineState;
   headerState: HeaderState;
   keyboardState: KeyboardState;
@@ -20,6 +22,7 @@ const storeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || c
 const store = createStore(
   combineReducers<AppState>({
     titleState: titleReducer,
+    endingState: endingReducer,
     typingEngineState: typingEngineReducer,
     headerState: headerReducer,
     keyboardState: keyboardReducer,

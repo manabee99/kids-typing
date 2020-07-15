@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import store, { AppState } from '../KidsTypingStore';
 import { SoundResources } from '../SoundResources';
 import { TitlePageForm } from '../components/pages/title-page/TitlePageForm';
 import { TitleActions } from '../store/actions/TitleAction';
 import { SoundActions } from '../store/actions/SoundActions';
 import { SoundState } from '../store/reducers/SoundReducer';
+import store, { AppState } from '../store/KidsTypingStore';
 
 const mapStateToProps = (appState: AppState) => {
   return {

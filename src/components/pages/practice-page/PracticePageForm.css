@@ -439,6 +439,24 @@
 }
 
 /* ------------------------------------------- */
+/* ステージに発射する「文字」の定義               */
+/* ------------------------------------------- */
+
+/* 文字のベース（sakura、birdの共通部分）*/
+.character-base {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  font-size: 80px;
+  color: var(--kt-character);
+}
+
+/* 「文字」が数字である場合の文字色 */
+.character-number {
+  color: var(--kt-character-number) !important;
+}
+
+/* ------------------------------------------- */
 /* ステージ「桜」の定義                          */
 /* ------------------------------------------- */
 
@@ -735,34 +753,129 @@
 
 
 /* ------------------------------------------- */
-/* ステージ「花火」の定義                        */
+/* ステージ「ハロウィン」の定義                        */
 /* ------------------------------------------- */
 
-/* ステージ「花火」の枠 */
-.practice-stage-hanabi-frame {
-  width: 1000px;
+/* ステージ「ハロウィン」の枠 */
+.practice-stage-halloween-frame {
+  position: relative;
+  width: 980px;
   height: 600px;
-  display: flex;
-  flex-direction: row;
-  background-image: url(../../../images/background-sakura.png);
+  overflow: hidden;
+  margin: 5px 10px 5px 10px;
+  background-image: url(../../../images/background-halloween.png);
   background-size: 100%;
   background-repeat: no-repeat;
 }
 
-/* ------------------------------------------- */
-/* ステージに発射する「文字」の定義               */
-/* ------------------------------------------- */
-
-/* 文字のベース（sakura、birdの共通部分）*/
-.character-base {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  font-size: 80px;
-  color: var(--kt-character);
+/* 「文字」の種別が「コウモリ」の画像とアニメーション */
+.character-bat {
+  background: center/100% no-repeat url('../../../images/character-bat.png');
+  animation: 0.5s ease-in-out infinite animation-character-bat;
+  transform-origin: center center;
+}
+@keyframes animation-character-bat {
+  0% {
+    transform: perspective(100px) translate3d(0px, 0px, 0px);
+  }
+  25% {
+    transform: perspective(100px) translate3d(0px, 0px, 20px);
+  }
+  50% {
+    transform: perspective(100px) translate3d(0px, 0px, -20px);
+  }
+  100% {
+    transform: perspective(100px) translate3d(0px, 0px, 0px);
+  }
 }
 
-/* 「文字」が数字である場合の文字色 */
-.character-number {
-  color: var(--kt-character-number) !important;
+/* 「文字」の種別が「黒猫」の画像とアニメーション */
+.character-blackcat {
+  background: center/70% no-repeat url('../../../images/character-blackcat.png');
+  animation: 1s ease-in infinite animation-character-blackcat;
+  transform-origin: center center;
+  padding-left: 20px;
+}
+@keyframes animation-character-blackcat {
+  0% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg);
+  }
+  25% {
+    transform: perspective(200px) rotate3d(0, 1, 0, -10deg);
+  }
+  50% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 10deg);
+  }
+  100% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg);
+  }
+}
+
+/* 「文字」の種別が「お化け」の画像とアニメーション */
+.character-ghost {
+  background: center/70% no-repeat url('../../../images/character-ghost.png');
+  animation: 4s ease-in-out infinite animation-character-ghost;
+  transform-origin: center center;
+}
+@keyframes animation-character-ghost {
+  0% {
+    transform: rotate(0deg) translate(0px, 0px);
+  }
+  20% {
+    transform: rotate(40deg) translate(-20px, 0px);
+  }
+  40% {
+    transform: rotate(10deg) translate(-20px, -20px);
+  }
+  60% {
+    transform: rotate(-40deg) translate(20px, -20px);
+  }
+  80% {
+    transform: rotate(-20deg) translate(20px, 20px);;
+  }
+  100% {
+    transform: rotate(0deg) translate(0px, 0px);
+  }
+}
+
+/* 「文字」の種別が「かぼちゃ」の画像とアニメーション */
+.character-pumpkin {
+  background: center/90% no-repeat url('../../../images/character-pumpkin.png');
+  animation: 3s ease-in-out infinite animation-character-pumpkin;
+  transform-origin: center center;
+}
+@keyframes animation-character-pumpkin {
+  0% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg) translate(0px, 0px);
+  }
+  25% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 360deg) translate(0px, 0px);
+  }
+  50% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg) translate(0px, 30px);
+  }
+  100% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg) translate(0px, 0px);
+  }
+}
+
+/* 「文字」の種別が「魔女」の画像とアニメーション */
+.character-witch {
+  background: center/90% no-repeat url('../../../images/character-witch.png');
+  animation: 3s ease-in-out infinite animation-character-witch;
+  transform-origin: center center;
+}
+@keyframes animation-character-witch {
+  0% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg);
+  }
+  25% {
+    transform: perspective(200px) rotate3d(0, 1, 0, -20deg);
+  }
+  50% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 20deg);
+  }
+  100% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg);
+  }
 }

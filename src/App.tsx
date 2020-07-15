@@ -3,6 +3,7 @@ import PracticePageContainer from "./containers/PracticePageContainer";
 import TitlePageContainer from "./containers/TitlePageContainer";
 import { Route, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
+import EndingPageContainer from './containers/EndingPageContainer';
 
 const App: React.FC = (props) => {
   return (
@@ -20,6 +21,12 @@ const App: React.FC = (props) => {
           <Route
             path="/kids-typing/practice"
             component={PracticePageContainer}
+          ></Route>
+
+          {/* エンディングページ */}
+          <Route
+            path="/kids-typing/ending/:soundMuting"
+            component={EndingPageContainer}
           ></Route>
 
         </Switch>

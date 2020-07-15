@@ -8,6 +8,9 @@ export interface TitleState {
   // 練習レベル
   practiceLevel: number;
 
+  // 練習完了フラグ（true: 完了、false: まだ完了していない）
+  practiceCompleted: boolean;
+
   // ダイアログの表示有無（true: 表示中、false: 非表示）
   openedDialog: boolean;
 }
@@ -17,8 +20,14 @@ export interface TitleState {
 // --------------------------------------------
 export const titleInitialState: TitleState = {
   practiceLevel: 1,
+  practiceCompleted: false,
   openedDialog: false,
 };
+
+// --------------------------------------------
+// 最大練習レベル
+// --------------------------------------------
+export const MAX_PRACTICE_LEVEL = 2;
 
 // --------------------------------------------
 // タイトル画面Reducer
@@ -37,6 +46,7 @@ export const titleReducer = reducerWithInitialState(titleInitialState)
     return {
       ...state,
       practiceLevel: practiceLevel,
+      practiceCompleted: practiceLevel === MAX_PRACTICE_LEVEL
     };
   })
 
@@ -52,7 +62,8 @@ export const titleReducer = reducerWithInitialState(titleInitialState)
   .case(TitleActions.PRACTICE_LEVEL_UP, (state) => {
     return {
       ...state,
-      practiceLevel: state.practiceLevel + 1,
+      practiceLevel: state.practiceLevel + (state.practiceLevel < MAX_PRACTICE_LEVEL ? 1 : 0),
+      practiceCompleted: state.practiceLevel === (MAX_PRACTICE_LEVEL - 1)
     };
   })
 
@@ -61,6 +72,7 @@ export const titleReducer = reducerWithInitialState(titleInitialState)
     return {
       ...state,
       practiceLevel: 1,
+      practiceCompleted: false
     };
   })
 

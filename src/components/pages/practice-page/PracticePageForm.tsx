@@ -20,6 +20,7 @@ import { PracticeStageType } from '../../../store/actions/TypingEngineAction';
 import { PracticeStageSunflower } from './presentations/stages/sunflower/StageSunflower';
 import { PracticeStageGoldfish } from './presentations/stages/goldfish/StageGoldfish';
 import { PracticeStageSeabed } from './presentations/stages/seabed/StageSeabed';
+import { PracticeStageHalloween } from './presentations/stages/helloween/StageHalloween';
 
 // --------------------------------------------
 // 練習ページコンテナから受け取るパラメータの定義
@@ -49,6 +50,9 @@ interface OwnProps {
 
   // 練習レベル
   practiceLevel: number;
+
+  // 練習完了フラグ
+  practiceCompleted: boolean;
 
   // 発射された「文字」の状態
   characterStateList: CharacterState[];
@@ -167,6 +171,8 @@ export class PracticePageForm extends React.Component<Props> {
                 <PracticeStageGoldfish characterStateList={this.props.characterStateList}></PracticeStageGoldfish>
               ) : this.props.practiceStageType === 'seabed' ? (
                 <PracticeStageSeabed characterStateList={this.props.characterStateList}></PracticeStageSeabed>
+              ) : this.props.practiceStageType === 'halloween' ? (
+                <PracticeStageHalloween characterStateList={this.props.characterStateList}></PracticeStageHalloween>
               ) : (
                 <div></div>
               )}
@@ -175,10 +181,11 @@ export class PracticePageForm extends React.Component<Props> {
               <PracticeStartAnimation animationEnd={this.onAnimationEnd.bind(this)}></PracticeStartAnimation>
 
               {/* 練習終了アニメーション*/}
-              {this.props.remainingTime === 0 ? (
+              {this.props.remainingTime === 0? (
                 <PracticeEndAnimation
                   levelUp={this.props.missCounter < 3 ? true : false}
                   animationEnd={this.props.endAnimationEnd}
+                  practiceCompleted={this.props.practiceCompleted}
                 ></PracticeEndAnimation>
               ) : (
                 <div></div>

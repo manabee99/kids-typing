@@ -4,12 +4,13 @@ import { Dispatch } from 'redux';
 import { PracticePageForm } from '../components/pages/practice-page/PracticePageForm';
 import { TypingEngineActions } from '../store/actions/TypingEngineAction';
 import { TitleActions } from '../store/actions/TitleAction';
-import store, { AppState } from '../KidsTypingStore';
 import { KeyboardActions } from '../store/actions/KeyboardActions';
 import { SoundActions } from '../store/actions/SoundActions';
 import { HeaderActions } from '../store/actions/HeaderActions';
 import { SoundResources } from '../SoundResources';
 import { withRouter } from 'react-router';
+import store, { AppState } from '../store/KidsTypingStore';
+import { MAX_PRACTICE_LEVEL } from '../store/reducers/TitleReducer';
 
 const mapStateToProps = (appState: AppState) => {
   return {
@@ -51,6 +52,9 @@ const mapStateToProps = (appState: AppState) => {
 
     // 練習レベル
     practiceLevel: appState.titleState.practiceLevel,
+
+    // 練習完了フラグ
+    practiceCompleted: appState.titleState.practiceCompleted,
   };
 };
 
@@ -179,16 +183,22 @@ function startPractice(): void {
  * 練習終了
  */
 function endPractice(): void {
-  // レベルアップ判定
-  if (store.getState().headerState.missCounter <= 3) {
-    // レベルアップ
-    store.dispatch(TitleActions.PRACTICE_LEVEL_UP());
 
-    // レベルアップ効果音鳴動
-    store.dispatch(SoundActions.PLAYING_SOUND_EFFECT({ soundUrl: SoundResources.seVoiceGoodJob }));
-  } else {
-    // レベル保留残念効果音鳴動
-    store.dispatch(SoundActions.PLAYING_SOUND_EFFECT({ soundUrl: SoundResources.seVoicePity }));
+  // レベル更新前のレベルを取得
+  const previousLevel = store.getState().titleState.practiceLevel;
+
+  // レベルアップ判定
+  if (!store.getState().titleState.practiceCompleted) {
+    if (store.getState().headerState.missCounter <= 3) {
+      // レベルアップ
+      store.dispatch(TitleActions.PRACTICE_LEVEL_UP());
+
+      // レベルアップ効果音鳴動
+      store.dispatch(SoundActions.PLAYING_SOUND_EFFECT({ soundUrl: SoundResources.seVoiceGoodJob }));
+    } else {
+      // レベル保留残念効果音鳴動
+      store.dispatch(SoundActions.PLAYING_SOUND_EFFECT({ soundUrl: SoundResources.seVoicePity }));
+    }
   }
 
   // 練習レベルをweb storageに保存する
@@ -196,6 +206,12 @@ function endPractice(): void {
 
   // 練習メインループ用のインターバルをクリア
   clearInterval(intervalHandle);
+
+  // レベル２１になった場合はエンディングページに遷移する
+  if (store.getState().titleState.practiceCompleted && previousLevel === (MAX_PRACTICE_LEVEL - 1)) {
+    window.location.replace('/kids-typing/ending/' + (store.getState().soundState.soundMuting ? 'true' : 'false'));
+    return;
+  }
 
   // タイトル画面に遷移する
   window.location.replace('/kids-typing/title/' + (store.getState().soundState.soundMuting ? 'true' : 'false'));
@@ -301,17 +317,19 @@ export interface StageConfig {
  */
 function getStageConfig(practiceLevel: number): StageConfig {
   const stateConfig: StageConfig[] = [
+    // LEVEL 1
     {
       // stageType: 'sakura',
       // useCharacterTypes: ['bird', 'sakura'],
       // backgroundMusic: SoundResources.bgmStageSakura,
-      backgroundMusic: SoundResources.bgmStageSeabed,
-      stageType: 'seabed',
-      useCharacterTypes: ['turtle', 'octopus', 'blowfish', 'shark'],
+      backgroundMusic: SoundResources.bgmStageHalloween,
+      stageType: 'halloween',
+      useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
       enabledKeys: 'DFJK',
       importantKeys: '',
-      fireInterval: 2000,
+      fireInterval: 1000,
     },
+    // LEVEL 2
     {
       stageType: 'sunflower',
       useCharacterTypes: ['dragonfly', 'ladybird'],
@@ -320,6 +338,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: 'SL',
       fireInterval: 2000,
     },
+    // LEVEL 3
     {
       stageType: 'goldfish',
       useCharacterTypes: ['goldfish', 'blackfish'],
@@ -328,6 +347,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: 'GH',
       fireInterval: 2000,
     },
+    // LEVEL 4
     {
       stageType: 'sakura',
       useCharacterTypes: ['bird', 'sakura'],
@@ -336,6 +356,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: 'RU',
       fireInterval: 2000,
     },
+    // LEVEL 5
     {
       stageType: 'goldfish',
       useCharacterTypes: ['dragonfly', 'ladybird'],
@@ -344,6 +365,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: 'EI',
       fireInterval: 1000,
     },
+    // LEVEL 6
     {
       stageType: 'goldfish',
       useCharacterTypes: ['dragonfly', 'ladybird'],
@@ -352,6 +374,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: 'WO',
       fireInterval: 1000,
     },
+    // LEVEL 7
     {
       stageType: 'goldfish',
       useCharacterTypes: ['dragonfly', 'ladybird'],
@@ -360,6 +383,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: 'QP',
       fireInterval: 1000,
     },
+    // LEVEL 8
     {
       stageType: 'goldfish',
       useCharacterTypes: ['dragonfly', 'ladybird'],
@@ -368,6 +392,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: 'TY',
       fireInterval: 1000,
     },
+    // LEVEL 9
     {
       stageType: 'sunflower',
       useCharacterTypes: ['dragonfly', 'ladybird'],
@@ -376,6 +401,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: 'VN',
       fireInterval: 1000,
     },
+    // LEVEL 10
     {
       stageType: 'sunflower',
       useCharacterTypes: ['dragonfly', 'ladybird'],
@@ -384,6 +410,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: 'CM',
       fireInterval: 1000,
     },
+    // LEVEL 11
     {
       stageType: 'sunflower',
       useCharacterTypes: ['dragonfly', 'ladybird'],
@@ -392,6 +419,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: 'ZX',
       fireInterval: 1000,
     },
+    // LEVEL 12
     {
       stageType: 'sunflower',
       useCharacterTypes: ['dragonfly', 'ladybird'],
@@ -400,6 +428,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: '57',
       fireInterval: 1000,
     },
+    // LEVEL 13
     {
       stageType: 'seabed',
       useCharacterTypes: ['turtle', 'octopus', 'blowfish', 'shark'],
@@ -408,6 +437,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: '48',
       fireInterval: 1000,
     },
+    // LEVEL 14
     {
       stageType: 'seabed',
       useCharacterTypes: ['turtle', 'octopus', 'blowfish', 'shark'],
@@ -416,6 +446,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: '39',
       fireInterval: 1000,
     },
+    // LEVEL 15
     {
       stageType: 'seabed',
       useCharacterTypes: ['turtle', 'octopus', 'blowfish', 'shark'],
@@ -424,6 +455,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: '20',
       fireInterval: 1000,
     },
+    // LEVEL 16
     {
       stageType: 'seabed',
       useCharacterTypes: ['turtle', 'octopus', 'blowfish', 'shark'],
@@ -432,21 +464,50 @@ function getStageConfig(practiceLevel: number): StageConfig {
       importantKeys: '1',
       fireInterval: 1000,
     },
+    // LEVEL 17
     {
       stageType: 'halloween',
-      useCharacterTypes: ['dragonfly', 'ladybird'],
-      backgroundMusic: '',
+      useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
+      backgroundMusic: SoundResources.bgmStageHalloween,
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '1',
       fireInterval: 1000,
     },
+    // LEVEL 18
     {
       stageType: 'halloween',
-      useCharacterTypes: ['dragonfly', 'ladybird'],
-      backgroundMusic: '',
+      useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
+      backgroundMusic: SoundResources.bgmStageHalloween,
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '1',
       fireInterval: 1000,
+    },
+    // LEVEL 19
+    {
+      stageType: 'halloween',
+      useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
+      backgroundMusic: SoundResources.bgmStageHalloween,
+      enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
+      importantKeys: '1',
+      fireInterval: 1000,
+    },
+    // LEVEL 20
+    {
+      stageType: 'halloween',
+      useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
+      backgroundMusic: SoundResources.bgmStageHalloween,
+      enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
+      importantKeys: '1',
+      fireInterval: 1000,
+    },
+    // LEVEL 21（全）レベルクリアの後
+    {
+      stageType: 'halloween',
+      useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
+      backgroundMusic: SoundResources.bgmStageHalloween,
+      enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
+      importantKeys: '1',
+      fireInterval: 700,
     },
   ];
   return stateConfig[practiceLevel - 1];

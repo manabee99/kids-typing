@@ -150,7 +150,7 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
         componentId: (state.componentIdSequence + 1).toString(),
         practiceCharacterType: characterType,
         character: payload.character,
-        top:  characterType === 'shark' ? 400 : 100 + Math.round(Math.random() * 100),
+        top:  (characterType === 'shark') ? 400 : (characterType === 'blackcat') ? 450 : 100 + Math.round(Math.random() * 100),
         left: 900,
         XAcceleration: -2,
         YAcceleration: 0,
@@ -232,7 +232,7 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
 // --------------------------------------------
 
 /**
- * 文字の位置を算出する（横方向に移動する）
+ * 文字の位置を算出する（縦方向に移動する）
  * @param characterType 文字の種別
  * @param top 現在の位置
  * @param yAcceleration 縦方向の移動速度
@@ -248,14 +248,19 @@ function tickCharacterTop(characterType: PracticeCharacterType, top: number, yAc
     case 'turtle':
     case 'octopus':
     case 'blowfish':
+    case 'bat':
+    case 'ghost':
+    case 'pumpkin':
+    case 'witch':
       return Math.round(top + yAcceleration);
     case 'shark':
+    case 'blackcat':
       return top;
   }
 }
 
 /**
- * 文字の位置を算出する（縦方向に移動する）
+ * 文字の位置を算出する（横方向に移動する）
  * @param characterType 文字の種別
  * @param left 現在の位置
  * @param xAcceleration 横方向の移動速度
@@ -272,6 +277,11 @@ function tickCharacterLeft(characterType: PracticeCharacterType, left: number, x
     case 'octopus':
     case 'blowfish':
     case 'shark':
+    case 'bat':
+    case 'blackcat':
+    case 'ghost':
+    case 'pumpkin':
+    case 'witch':
   }
   return Math.round(left + xAcceleration);
 }
@@ -290,6 +300,7 @@ function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: n
     case 'blackfish':
     case 'turtle':
     case 'blowfish':
+    case 'witch':
       // ランダム上下するが突然向きが逆転しないように制御する
       var acc = yAcceleration + (0.5 - Math.random() * 1);
       if (acc > 1.0) {
@@ -303,11 +314,14 @@ function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: n
     case 'bird':
     case 'dragonfly':
     case 'ladybird':
+    case 'pumpkin':
       // ランダム上下する
       return 2 - Math.random() * 4;
 
     case 'octopus':
-      // 激しくランダムに上下するが突然向きが逆転しないように制御する
+    case 'bat':
+    case 'ghost':
+        // 激しくランダムに上下するが突然向きが逆転しないように制御する
       var acc = yAcceleration + (0.5 - Math.random() * 1);
       if (acc > 2.0) {
         acc = 2.0;
@@ -316,7 +330,9 @@ function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: n
         acc = -1.0;
       }
       return acc;
+
     case 'shark':
+    case 'blackcat':
       // 上下には移動しない
       return 0;
   }

@@ -54,6 +54,11 @@ const characterTypes = {
   octopus: '8',
   blowfish: '9',
   shark: '10',
+  bat: '11',
+  blackcat: '12',
+  ghost: '13',
+  pumpkin: '14',
+  witch: '15',
 } as const;
 export type PracticeCharacterType = keyof typeof characterTypes;
 

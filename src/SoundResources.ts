@@ -8,6 +8,9 @@ export const SoundResources = {
   bgmStageSunflower: require('./sounds/bgm-stage-sunflower@lovelyflower.mp3'),
   bgmStageGoldfish: require('./sounds/bgm-stage-goldfish@retropark.mp3'),
   bgmStageSeabed: require('./sounds/bgm-stage-seabed@retrogamecenter2.mp3'),
+  bgmStageHalloween: require('./sounds/bgm-stage-halloween@sunadokeiseiun.mp3'),
+  
+  bgmEnding: require('./sounds/bgm-ending@chocolatedaisakusen.mp3'),
   
   bgmStageEnd: require('./sounds/bgm-stage-end@nichinichikorekoujitsu.mp3'),
   

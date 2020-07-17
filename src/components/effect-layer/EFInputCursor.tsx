@@ -22,8 +22,9 @@ export const EfInputCursor: React.FC<EFInputCursorProps> = (props) => {
   return (
     <div
       className="ef-input-cursor"
+      // 文字種別が「黒猫」である場合のみ、カーソルの表示位置を少し上にする
       style={{
-        top: props.characterStateList[0].top - 12,
+        top: props.characterStateList[0].top - (props.characterStateList[0].practiceCharacterType === 'blackcat' ?  30 : 12),
         left: props.characterStateList[0].left - 12,
         opacity: 0.5,
       }}

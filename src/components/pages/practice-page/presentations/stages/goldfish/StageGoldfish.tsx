@@ -6,6 +6,7 @@ import '../../../PracticePageForm.css';
 import { CharacterState } from '../../../../../../store/reducers/TypingEngineReducer';
 import { CharacterGoldfish } from './CharacterGoldfish';
 import { CharacterBlackfish } from './CharacterBlackfish';
+import { CharacterCatfish } from './CharacterCatfish';
 
 // --------------------------------------------
 // 練習ステージ（金魚）Component
@@ -43,6 +44,19 @@ export const PracticeStageGoldfish: React.FC<PracticeStageGoldfishProps> = (prop
           left={c.left}
           charcterState={c.characterState}
         ></CharacterBlackfish>
+      );
+      characters.push(charCompo);
+    } else if (c.practiceCharacterType === 'catfish') {
+      // 入力文字の種別が「なまず」の場合
+      const charCompo = (
+        <CharacterCatfish
+          isHead={idx === 0}
+          componentId={c.componentId}
+          character={c.character}
+          top={c.top}
+          left={c.left}
+          charcterState={c.characterState}
+        ></CharacterCatfish>
       );
       characters.push(charCompo);
     }

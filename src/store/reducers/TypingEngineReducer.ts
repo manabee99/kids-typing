@@ -134,13 +134,12 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
   })
   // 文字発射
   .case(TypingEngineActions.FIRE_CHARACTER, (state, payload) => {
-
     // 文字をランダムに選択する
     var characterType = state.useCharacterTypes[Math.floor(Math.random() * state.useCharacterTypes.length)];
 
     // サメは一匹だけしか出さない
-    const hasShake = state.characterStateList.filter( c => c.practiceCharacterType === 'shark');
-    while(hasShake.length > 0 && characterType === 'shark') {
+    const hasShake = state.characterStateList.filter((c) => c.practiceCharacterType === 'shark');
+    while (hasShake.length > 0 && characterType === 'shark') {
       characterType = state.useCharacterTypes[Math.floor(Math.random() * state.useCharacterTypes.length)];
     }
 
@@ -150,7 +149,7 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
         componentId: (state.componentIdSequence + 1).toString(),
         practiceCharacterType: characterType,
         character: payload.character,
-        top:  (characterType === 'shark') ? 400 : (characterType === 'blackcat') ? 450 : 100 + Math.round(Math.random() * 100),
+        top: characterType === 'shark' ? 400 : characterType === 'blackcat' ? 450 : 100 + Math.round(Math.random() * 100),
         left: 900,
         XAcceleration: -2,
         YAcceleration: 0,
@@ -244,6 +243,7 @@ function tickCharacterTop(characterType: PracticeCharacterType, top: number, yAc
     case 'dragonfly':
     case 'ladybird':
     case 'goldfish':
+    case 'catfish':
     case 'blackfish':
     case 'turtle':
     case 'octopus':
@@ -273,6 +273,7 @@ function tickCharacterLeft(characterType: PracticeCharacterType, left: number, x
     case 'ladybird':
     case 'goldfish':
     case 'blackfish':
+    case 'catfish':
     case 'turtle':
     case 'octopus':
     case 'blowfish':
@@ -298,6 +299,7 @@ function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: n
     case 'sakura':
     case 'goldfish':
     case 'blackfish':
+    case 'catfish':
     case 'turtle':
     case 'blowfish':
     case 'witch':
@@ -321,7 +323,7 @@ function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: n
     case 'octopus':
     case 'bat':
     case 'ghost':
-        // 激しくランダムに上下するが突然向きが逆転しないように制御する
+      // 激しくランダムに上下するが突然向きが逆転しないように制御する
       var acc = yAcceleration + (0.5 - Math.random() * 1);
       if (acc > 2.0) {
         acc = 2.0;

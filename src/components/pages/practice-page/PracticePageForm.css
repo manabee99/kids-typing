@@ -592,7 +592,7 @@
 
 /* 「文字」の種別が「金魚」の画像とアニメーション */
 .character-goldfish {
-  background: center/80% no-repeat url('../../../images/character-goldfish.png');
+  background: center/100% no-repeat url('../../../images/character-goldfish.png');
   animation: 1.5s ease-in-out infinite animation-character-goldfish;
   transform-origin: center center;
 }
@@ -619,10 +619,10 @@
 
 /* 「文字」の種別が「出目金」の画像とアニメーション */
 .character-blackfish {
-  background: center/100% no-repeat url('../../../images/character-blackfish.png');
+  background: center/140% no-repeat url('../../../images/character-blackfish.png');
   animation: 3s ease-in infinite animation-character-blackfish;
   transform-origin: center center;
-  padding-left: 20px;
+  padding-top: 20px;
 }
 @keyframes animation-character-blackfish {
   0% {
@@ -636,6 +636,28 @@
   }
   100% {
     transform: perspective(200px) translate3d(0px, 0px, 0px) rotate(0deg);
+  }
+}
+
+/* 「文字」の種別が「なまず」の画像とアニメーション */
+.character-catfish {
+  background: center/120% no-repeat url('../../../images/character-catfish.png');
+  animation: 5s ease-in infinite animation-character-catfish;
+  transform-origin: center center;
+  width: 250px !important;
+}
+@keyframes animation-character-catfish {
+  0% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg);
+  }
+  25% {
+    transform: perspective(200px) rotate3d(0, 1, 0, -20deg);
+  }
+  50% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 20deg);
+  }
+  100% {
+    transform: perspective(200px) rotate3d(0, 1, 0, 0deg);
   }
 }
 

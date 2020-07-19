@@ -74,6 +74,7 @@ function startEnding(): void {
     'dragonfly',
     'ladybird',
     'blackfish',
+    'catfish',
     'turtle',
     'octopus',
     'blowfish',

@@ -252,7 +252,8 @@ function tickCharacterTop(characterType: PracticeCharacterType, top: number, yAc
     case 'ghost':
     case 'pumpkin':
     case 'witch':
-      return Math.round(top + yAcceleration);
+      // ０～４００の間を超えないようにする
+      return Math.max(Math.min(Math.round(top + yAcceleration), 400), 0);
     case 'shark':
     case 'blackcat':
       return top;

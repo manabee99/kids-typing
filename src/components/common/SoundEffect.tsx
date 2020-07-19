@@ -25,7 +25,6 @@ export const SoundEffect: React.FC<SoundEffectProps> = (props) => {
           <audio src={soundStatus.url} autoPlay></audio>
         </div>
       );
-      console.log(soundStatus.url);
     });
 
   return <div>{soundEffects}</div>;

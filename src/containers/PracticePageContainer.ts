@@ -253,7 +253,8 @@ function main(fps: number, fireInterval: number, practiceCharacter: string[]) {
   if (cnt * (1000 / fps) > fireInterval) {
     store.dispatch(
       TypingEngineActions.FIRE_CHARACTER({
-        character: practiceCharacter[fireCharaIndex],
+        // 練習終了アニメーションなどにより練習が長くなる可能性があるので最後の文字を表示した後は最初に戻るようにする
+        character: practiceCharacter[fireCharaIndex % practiceCharacter.length],
       })
     );
     cnt = 0;
@@ -322,9 +323,12 @@ function getStageConfig(practiceLevel: number): StageConfig {
       // stageType: 'sakura',
       // useCharacterTypes: ['bird', 'sakura'],
       // backgroundMusic: SoundResources.bgmStageSakura,
-      backgroundMusic: SoundResources.bgmStageHalloween,
-      stageType: 'halloween',
-      useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
+      stageType: 'goldfish',
+      useCharacterTypes: ['goldfish', 'blackfish', 'catfish'],
+      backgroundMusic: SoundResources.bgmStageGoldfish,
+      // backgroundMusic: SoundResources.bgmStageHalloween,
+      // stageType: 'halloween',
+      // useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
       enabledKeys: 'DFJK',
       importantKeys: '',
       fireInterval: 1000,

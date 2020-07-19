@@ -23,7 +23,7 @@ export const PracticeEndAnimation: React.FC<PracticeEndAnimationProps> = (props)
   const cls = {
     frame: 'kt-box-fit practice-end-animation-layer-frame',
     animation01: 'kt-box-fit kt-flex-vertical-center kt-font-bold-stroke practice-end-animation-base practice-end-animation-1',
-    animation02: 'ktS-box-fit kt-flex-vertical-center kt-font-bold-stroke practice-end-animation-base practice-end-animation-2',
+    animation02: 'kt-box-fit kt-flex-vertical-center kt-font-bold-stroke practice-end-animation-base practice-end-animation-2',
     animation03: 'kt-box-fit kt-flex-vertical-center kt-font-bold-stroke practice-end-animation-base practice-end-animation-3',
     animation04: 'kt-box-fit kt-flex-vertical-center kt-font-bold-stroke practice-end-animation-base practice-end-animation-4',
     animation05: 'kt-box-fit kt-flex-vertical-center kt-font-bold-stroke practice-end-animation-base practice-end-animation-5',
@@ -44,12 +44,9 @@ export const PracticeEndAnimation: React.FC<PracticeEndAnimationProps> = (props)
       animations.push(<div className={cls.animation02}>おつかれさま！</div>);
       animations.push(<div className={cls.animation03}>れんしゅうの<br></br>けっかは！！</div>);
       animations.push(
-        <div className={cls.animation04} onAnimationEnd={() => props.animationEnd()}>
-        ★　★　★<br></br>
-        レベル<br></br>
-        アップ！！<br></br>
-        　★　★　
-      </div>
+        <div className={cls.animation04 + ' practice-end-level-up'} onAnimationEnd={() => props.animationEnd()}>
+          レベルアップ
+        </div>
       );
     } else {
       // もう一回

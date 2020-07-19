@@ -399,6 +399,11 @@
   opacity: 0;
 }
 
+/* 練習終了時のレベルアップ画像 */
+.practice-end-level-up {
+  background: center 90%/35% no-repeat url('../../../images/practice-end-level-up.png');
+}
+
 /* 練習開始アニメーションのアニメーション（カウントダウンと結果） */
 .practice-end-animation-1 {
   animation: animation-practice-end-animation 3s ease-out 0s;

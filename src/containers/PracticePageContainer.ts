@@ -169,7 +169,7 @@ function startPractice(): void {
   const stageConfig = getStageConfig(store.getState().titleState.practiceLevel);
 
   // 現在のレベルの有効キーをもとに練習中に排出する「文字」の配列を作成する
-  const practiceCharacters = createPracticeCaracters(60, stageConfig.enabledKeys);
+  const practiceCharacters = createPracticeCaracters(60, stageConfig.enabledKeys, stageConfig.importantKeys);
 
   // 練習時間に60秒を設定して練習を開始する
   store.dispatch(TypingEngineActions.START_PRACTICE({ startTime: 60 }));
@@ -267,12 +267,13 @@ function main(fps: number, fireInterval: number, practiceCharacter: string[]) {
  * 発射する「文字」の配列を作成する。
  * @param characterCount 作り出す配列の総数
  * @param sourceCharacter 配列に組み込む「文字」
+ * @param importantCharacter 重点文字
  */
-function createPracticeCaracters(characterCount: number, sourceCharacter: string): string[] {
-  // 総数に合わせて元「文字」を増やす
+function createPracticeCaracters(characterCount: number, sourceCharacter: string, importantCharacter: string): string[] {
+  // 総数に合わせて元「文字」を増やす（重点文字は出現回数を多くする）
   var characters = '';
   for (var i = 0; i < characterCount / sourceCharacter.length; i++) {
-    characters = characters + sourceCharacter;
+    characters = characters + sourceCharacter + importantCharacter;
   }
 
   // 総数を超えた部分を削除する
@@ -320,24 +321,18 @@ function getStageConfig(practiceLevel: number): StageConfig {
   const stateConfig: StageConfig[] = [
     // LEVEL 1
     {
-      // stageType: 'sakura',
-      // useCharacterTypes: ['bird', 'sakura'],
-      // backgroundMusic: SoundResources.bgmStageSakura,
-      stageType: 'goldfish',
-      useCharacterTypes: ['goldfish', 'blackfish', 'catfish'],
-      backgroundMusic: SoundResources.bgmStageGoldfish,
-      // backgroundMusic: SoundResources.bgmStageHalloween,
-      // stageType: 'halloween',
-      // useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
+      stageType: 'sakura',
+      useCharacterTypes: ['bird', 'sakura'],
+      backgroundMusic: SoundResources.bgmStageSakura,
       enabledKeys: 'DFJK',
       importantKeys: '',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 2
     {
-      stageType: 'sunflower',
-      useCharacterTypes: ['dragonfly', 'ladybird'],
-      backgroundMusic: SoundResources.bgmStageSunflower,
+      stageType: 'sakura',
+      useCharacterTypes: ['bird', 'sakura'],
+      backgroundMusic: SoundResources.bgmStageSakura,
       enabledKeys: 'SDFJKL',
       importantKeys: 'SL',
       fireInterval: 2000,
@@ -367,7 +362,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageGoldfish,
       enabledKeys: 'ERUIASDFGHJKL',
       importantKeys: 'EI',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 6
     {
@@ -376,7 +371,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageGoldfish,
       enabledKeys: 'WERUIOASDFGHJKL',
       importantKeys: 'WO',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 7
     {
@@ -385,7 +380,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageGoldfish,
       enabledKeys: 'QWERUIOPASDFGHJKL',
       importantKeys: 'QP',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 8
     {
@@ -394,7 +389,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageGoldfish,
       enabledKeys: 'QWERTYUIOPASDFGHJKL',
       importantKeys: 'TY',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 9
     {
@@ -403,7 +398,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageSunflower,
       enabledKeys: 'QWERTYUIOPASDFGHJKLVN',
       importantKeys: 'VN',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 10
     {
@@ -412,7 +407,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageSunflower,
       enabledKeys: 'QWERTYUIOPASDFGHJKLCVNM',
       importantKeys: 'CM',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 11
     {
@@ -421,7 +416,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageSunflower,
       enabledKeys: 'QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: 'ZX',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 12
     {
@@ -430,7 +425,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageSunflower,
       enabledKeys: '57QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '57',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 13
     {
@@ -439,7 +434,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageSeabed,
       enabledKeys: '4578QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '48',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 14
     {
@@ -448,7 +443,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageSeabed,
       enabledKeys: '345789QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '39',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 15
     {
@@ -457,7 +452,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageSeabed,
       enabledKeys: '23457890QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '20',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 16
     {
@@ -466,7 +461,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
       backgroundMusic: SoundResources.bgmStageSeabed,
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
       importantKeys: '1',
-      fireInterval: 1000,
+      fireInterval: 2000,
     },
     // LEVEL 17
     {
@@ -474,8 +469,8 @@ function getStageConfig(practiceLevel: number): StageConfig {
       useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
       backgroundMusic: SoundResources.bgmStageHalloween,
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
-      importantKeys: '1',
-      fireInterval: 1000,
+      importantKeys: '',
+      fireInterval: 1800,
     },
     // LEVEL 18
     {
@@ -483,8 +478,8 @@ function getStageConfig(practiceLevel: number): StageConfig {
       useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
       backgroundMusic: SoundResources.bgmStageHalloween,
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
-      importantKeys: '1',
-      fireInterval: 1000,
+      importantKeys: '',
+      fireInterval: 1600,
     },
     // LEVEL 19
     {
@@ -492,8 +487,8 @@ function getStageConfig(practiceLevel: number): StageConfig {
       useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
       backgroundMusic: SoundResources.bgmStageHalloween,
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
-      importantKeys: '1',
-      fireInterval: 1000,
+      importantKeys: '',
+      fireInterval: 1400,
     },
     // LEVEL 20
     {
@@ -501,8 +496,8 @@ function getStageConfig(practiceLevel: number): StageConfig {
       useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
       backgroundMusic: SoundResources.bgmStageHalloween,
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
-      importantKeys: '1',
-      fireInterval: 1000,
+      importantKeys: '',
+      fireInterval: 1200,
     },
     // LEVEL 21（全）レベルクリアの後
     {
@@ -510,8 +505,8 @@ function getStageConfig(practiceLevel: number): StageConfig {
       useCharacterTypes: ['bat', 'blackcat', 'ghost', 'pumpkin', 'witch'],
       backgroundMusic: SoundResources.bgmStageHalloween,
       enabledKeys: '123457890QWERTYUIOPASDFGHJKLZXCVNM',
-      importantKeys: '1',
-      fireInterval: 700,
+      importantKeys: '',
+      fireInterval: 1000,
     },
   ];
   return stateConfig[practiceLevel - 1];

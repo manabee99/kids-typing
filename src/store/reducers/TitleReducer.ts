@@ -27,7 +27,7 @@ export const titleInitialState: TitleState = {
 // --------------------------------------------
 // 最大練習レベル
 // --------------------------------------------
-export const MAX_PRACTICE_LEVEL = 2;
+export const MAX_PRACTICE_LEVEL = 20;
 
 // --------------------------------------------
 // タイトル画面Reducer

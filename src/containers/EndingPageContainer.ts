@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { TitleActions } from '../store/actions/TitleAction';
 import { SoundActions } from '../store/actions/SoundActions';
 import store, { AppState } from '../store/KidsTypingStore';
 import { EndingPageForm } from '../components/pages/ending-page/EndingPageForm';
@@ -115,12 +114,10 @@ function endEnding(): void {
  * cntとfireCharaIndexを何とかしたい・・・
  */
 var cnt = 0;
-var fireCharaIndex = 0;
 function main(fps: number, fireInterval: number) {
   // 時間を進める
   store.dispatch(TypingEngineActions.TICK());
 
-  console.log(cnt);
   // 「文字」出力間隔に達した場合は「文字」を出力する
   if (cnt * (1000 / fps) > fireInterval) {
     store.dispatch(
@@ -129,7 +126,6 @@ function main(fps: number, fireInterval: number) {
       })
     );
     cnt = 0;
-    fireCharaIndex++;
   }
   cnt++;
 }

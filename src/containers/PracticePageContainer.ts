@@ -280,7 +280,7 @@ function createPracticeCaracters(characterCount: number, sourceCharacter: string
   const charactersArray = Array.from(characters.substr(0, characterCount));
 
   // 文字配列をシャッフルする
-  for (var i = 0; i < 100; i++) {
+  for (i = 0; i < 100; i++) {
     const idx1 = Math.round(Math.random() * (characterCount - 1));
     const idx2 = Math.round(Math.random() * (characterCount - 1));
     const chara1 = charactersArray[idx1];

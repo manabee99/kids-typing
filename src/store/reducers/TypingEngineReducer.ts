@@ -305,14 +305,14 @@ function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: n
     case 'blowfish':
     case 'witch':
       // ランダム上下するが突然向きが逆転しないように制御する
-      var acc = yAcceleration + (0.5 - Math.random() * 1);
-      if (acc > 1.0) {
-        acc = 1.0;
+      var acc1 = yAcceleration + (0.5 - Math.random() * 1);
+      if (acc1 > 1.0) {
+        acc1 = 1.0;
       }
-      if (acc < -0.5) {
-        acc = -0.5;
+      if (acc1 < -0.5) {
+        acc1 = -0.5;
       }
-      return acc;
+      return acc1;
 
     case 'bird':
     case 'dragonfly':
@@ -325,14 +325,14 @@ function tickCharacterYAcceleration(characterType: PracticeCharacterType, top: n
     case 'bat':
     case 'ghost':
       // 激しくランダムに上下するが突然向きが逆転しないように制御する
-      var acc = yAcceleration + (0.5 - Math.random() * 1);
-      if (acc > 2.0) {
-        acc = 2.0;
+      var acc2 = yAcceleration + (0.5 - Math.random() * 1);
+      if (acc2 > 2.0) {
+        acc2 = 2.0;
       }
-      if (acc < -1.0) {
-        acc = -1.0;
+      if (acc2 < -1.0) {
+        acc2 = -1.0;
       }
-      return acc;
+      return acc2;
 
     case 'shark':
     case 'blackcat':

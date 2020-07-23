@@ -15,5 +15,5 @@ export const TitleLogo: React.FC<TitleLogoProps> = (props) => {
     titleLogo: 'kt-font-bold-stroke kt-text-shadow title-logo',
   };
 
-  return <div className={cls.titleLogo}>Kids-Typing</div>;
+  return <div className={cls.titleLogo}>Kids★Typing</div>;
 };

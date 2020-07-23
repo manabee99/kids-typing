@@ -7,7 +7,6 @@ import './EndingPageForm.css';
 import { EndingLogo } from './presentations/EndingLogo';
 import { BackgroundMusic } from '../../common/BackgroundMusic';
 import { SoundEffect } from '../../common/SoundEffect';
-import { SoundResources } from '../../../SoundResources';
 import { SoundStatus } from '../../../store/reducers/SoundReducer';
 import { CharacterState, EffectorState } from '../../../store/reducers/TypingEngineReducer';
 import { CharacterSakura } from '../practice-page/presentations/stages/sakura/CharacterSakura';

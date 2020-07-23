@@ -818,7 +818,7 @@
 
 /* 「文字」の種別が「黒猫」の画像とアニメーション */
 .character-blackcat {
-  background: center/70% no-repeat url('../../../images/character-blackcat.png');
+  background: center/90% no-repeat url('../../../images/character-blackcat.png');
   animation: 1s ease-in infinite animation-character-blackcat;
   transform-origin: center center;
   padding-left: 20px;

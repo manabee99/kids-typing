@@ -2,6 +2,7 @@ import React from 'react';
 
 import '../../../../../common/KidsTypingCommon.css';
 import '../../../PracticePageForm.css';
+import { Character } from '../common/Character';
 
 // --------------------------------------------
 // タイプ練習の文字（サメ）Component
@@ -31,14 +32,10 @@ export const CharacterShark: React.FC<CharacterSharkProps> = (props) => {
   return (
     <div
       key={'shark' + props.componentId}
-      // ゼロとＯを区別するために数字は文字色を変更するクラスを追加する
-      className={'kt-flex-vertical-center kt-font-white character-base character-shark '}
+      className={'kt-flex-vertical-center kt-font-white character-base character-shark'}
       style={{ top: Math.round(props.top), left: Math.round(props.left) }}
     >
-      {/* 画像が横長なので文字の位置を左に寄せる */}
-      <div className={'character-base' + ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')} style={{ top: 50, left: 100 }}>
-        {props.character}
-      </div>
+      <Character left={20} character={props.character}></Character>
     </div>
   );
 };

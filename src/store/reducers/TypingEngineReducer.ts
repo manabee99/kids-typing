@@ -149,7 +149,7 @@ export const typingEngineReducer = reducerWithInitialState(typingEngineInitialSt
         componentId: (state.componentIdSequence + 1).toString(),
         practiceCharacterType: characterType,
         character: payload.character,
-        top: characterType === 'shark' ? 400 : characterType === 'blackcat' ? 450 : 100 + Math.round(Math.random() * 100),
+        top: characterType === 'shark' ? 400 : characterType === 'blackcat' ? 430 : 100 + Math.round(Math.random() * 100),
         left: 900,
         XAcceleration: -2,
         YAcceleration: 0,

@@ -339,9 +339,9 @@ function getStageConfig(practiceLevel: number): StageConfig {
     },
     // LEVEL 3
     {
-      stageType: 'goldfish',
-      useCharacterTypes: ['goldfish', 'blackfish'],
-      backgroundMusic: SoundResources.bgmStageGoldfish,
+      stageType: 'sakura',
+      useCharacterTypes: ['bird', 'sakura'],
+      backgroundMusic: SoundResources.bgmStageSakura,
       enabledKeys: 'ASDFGHJKL',
       importantKeys: 'GH',
       fireInterval: 2000,
@@ -358,7 +358,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
     // LEVEL 5
     {
       stageType: 'goldfish',
-      useCharacterTypes: ['dragonfly', 'ladybird'],
+      useCharacterTypes: ['goldfish', 'blackfish', 'catfish'],
       backgroundMusic: SoundResources.bgmStageGoldfish,
       enabledKeys: 'ERUIASDFGHJKL',
       importantKeys: 'EI',
@@ -367,7 +367,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
     // LEVEL 6
     {
       stageType: 'goldfish',
-      useCharacterTypes: ['dragonfly', 'ladybird'],
+      useCharacterTypes: ['goldfish', 'blackfish', 'catfish'],
       backgroundMusic: SoundResources.bgmStageGoldfish,
       enabledKeys: 'WERUIOASDFGHJKL',
       importantKeys: 'WO',
@@ -376,7 +376,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
     // LEVEL 7
     {
       stageType: 'goldfish',
-      useCharacterTypes: ['dragonfly', 'ladybird'],
+      useCharacterTypes: ['goldfish', 'blackfish', 'catfish'],
       backgroundMusic: SoundResources.bgmStageGoldfish,
       enabledKeys: 'QWERUIOPASDFGHJKL',
       importantKeys: 'QP',
@@ -385,7 +385,7 @@ function getStageConfig(practiceLevel: number): StageConfig {
     // LEVEL 8
     {
       stageType: 'goldfish',
-      useCharacterTypes: ['dragonfly', 'ladybird'],
+      useCharacterTypes: ['goldfish', 'blackfish', 'catfish'],
       backgroundMusic: SoundResources.bgmStageGoldfish,
       enabledKeys: 'QWERTYUIOPASDFGHJKL',
       importantKeys: 'TY',

@@ -21,58 +21,28 @@ type PracticeStageSeabedProps = OwnProps;
 export const PracticeStageSeabed: React.FC<PracticeStageSeabedProps> = (props) => {
   const characters: any = [];
   props.characterStateList.forEach((c, idx) => {
+    // キャラクターコンポーネントに設定する属性を構築
+    const componentAttr = {
+      isHead: idx === 0,
+      componentId: c.componentId,
+      character: c.character,
+      top: c.top,
+      left: c.left,
+      charcterState: c.characterState,
+    };
+
     if (c.practiceCharacterType === 'turtle') {
       // 入力文字の種別が「亀」の場合
-      const charCompo = (
-        <CharacterTurtle
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterTurtle>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterTurtle {...componentAttr}></CharacterTurtle>);
     } else if (c.practiceCharacterType === 'octopus') {
       // 入力文字の種別が「タコ」の場合
-      const charCompo = (
-        <CharacterOctopus
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterOctopus>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterOctopus {...componentAttr}></CharacterOctopus>);
     } else if (c.practiceCharacterType === 'blowfish') {
       // 入力文字の種別が「フグ」の場合
-      const charCompo = (
-        <CharacterBlowfish
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterBlowfish>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterBlowfish {...componentAttr}></CharacterBlowfish>);
     } else if (c.practiceCharacterType === 'shark') {
       // 入力文字の種別が「サメ」の場合
-      const charCompo = (
-        <CharacterShark
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterShark>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterShark {...componentAttr}></CharacterShark>);
     }
   });
 

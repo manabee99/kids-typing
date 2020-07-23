@@ -25,6 +25,7 @@ import { CharacterBlackCat } from '../practice-page/presentations/stages/hellowe
 import { CharacterGhost } from '../practice-page/presentations/stages/helloween/CharacterGhost';
 import { CharacterPumpkin } from '../practice-page/presentations/stages/helloween/CharacterPumpkin';
 import { CharacterWitch } from '../practice-page/presentations/stages/helloween/CharacterWitch';
+import { CharacterCatfish } from '../practice-page/presentations/stages/goldfish/CharacterCatfish';
 
 // --------------------------------------------
 // タイトルページコンテナから受け取るパラメータの定義
@@ -104,201 +105,64 @@ export class EndingPageForm extends React.Component<Props> {
 
     const characters: any = [];
     this.props.characterStateList.forEach((c, idx) => {
+    // キャラクターコンポーネントに設定する属性を構築
+    const componentAttr = {
+      isHead: idx === 0,
+      componentId: c.componentId,
+      character: c.character,
+      top: c.top,
+      left: c.left,
+      charcterState: c.characterState,
+    };
+
       if (c.practiceCharacterType === 'sakura') {
         // 入力文字の種別が「桜」の場合
-        const charCompo = (
-          <CharacterSakura
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterSakura>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterSakura {...componentAttr}></CharacterSakura>);
       } else if (c.practiceCharacterType === 'bird') {
         // 入力文字の種別が「小鳥」の場合
-        const charCompo = (
-          <CharacterBird
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterBird>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterBird {...componentAttr}></CharacterBird>);
       } else if (c.practiceCharacterType === 'goldfish') {
         // 入力文字の種別が「金魚」の場合
-        const charCompo = (
-          <CharacterGoldfish
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterGoldfish>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterGoldfish {...componentAttr}></CharacterGoldfish>);
       } else if (c.practiceCharacterType === 'blackfish') {
         // 入力文字の種別が「出目金」の場合
-        const charCompo = (
-          <CharacterBlackfish
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterBlackfish>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterBlackfish {...componentAttr}></CharacterBlackfish>);
+      } else if (c.practiceCharacterType === 'catfish') {
+        // 入力文字の種別が「ナマズ」の場合
+        characters.push(<CharacterCatfish {...componentAttr}></CharacterCatfish>);
       } else if (c.practiceCharacterType === 'dragonfly') {
         // 入力文字の種別が「とんぼ」の場合
-        const charCompo = (
-          <CharacterDragonfly
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterDragonfly>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterDragonfly {...componentAttr}></CharacterDragonfly>);
       } else if (c.practiceCharacterType === 'ladybird') {
         // 入力文字の種別が「てんとうむし」の場合
-        const charCompo = (
-          <CharacterLadybird
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterLadybird>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterLadybird {...componentAttr}></CharacterLadybird>);
       } else if (c.practiceCharacterType === 'turtle') {
         // 入力文字の種別が「亀」の場合
-        const charCompo = (
-          <CharacterTurtle
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterTurtle>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterTurtle {...componentAttr}></CharacterTurtle>);
       } else if (c.practiceCharacterType === 'octopus') {
         // 入力文字の種別が「タコ」の場合
-        const charCompo = (
-          <CharacterOctopus
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterOctopus>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterOctopus {...componentAttr}></CharacterOctopus>);
       } else if (c.practiceCharacterType === 'blowfish') {
         // 入力文字の種別が「フグ」の場合
-        const charCompo = (
-          <CharacterBlowfish
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterBlowfish>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterBlowfish {...componentAttr}></CharacterBlowfish>);
       } else if (c.practiceCharacterType === 'shark') {
         // 入力文字の種別が「サメ」の場合
-        const charCompo = (
-          <CharacterShark
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterShark>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterShark {...componentAttr}></CharacterShark>);
       } else if (c.practiceCharacterType === 'bat') {
         // 入力文字の種別が「コウモリ」の場合
-        const charCompo = (
-          <CharacterBat
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterBat>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterBat {...componentAttr}></CharacterBat>);
       } else if (c.practiceCharacterType === 'blackcat') {
         // 入力文字の種別が「黒猫」の場合
-        const charCompo = (
-          <CharacterBlackCat
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={``}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterBlackCat>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterBlackCat {...componentAttr}></CharacterBlackCat>);
       } else if (c.practiceCharacterType === 'ghost') {
         // 入力文字の種別が「お化け」の場合
-        const charCompo = (
-          <CharacterGhost
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={``}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterGhost>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterGhost {...componentAttr}></CharacterGhost>);
       } else if (c.practiceCharacterType === 'pumpkin') {
         // 入力文字の種別が「かぼちゃ」の場合
-        const charCompo = (
-          <CharacterPumpkin
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterPumpkin>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterPumpkin {...componentAttr}></CharacterPumpkin>);
       } else if (c.practiceCharacterType === 'witch') {
         // 入力文字の種別が「魔女」の場合
-        const charCompo = (
-          <CharacterWitch
-            isHead={idx === 0}
-            componentId={c.componentId}
-            character={''}
-            top={c.top}
-            left={c.left}
-            charcterState={c.characterState}
-          ></CharacterWitch>
-        );
-        characters.push(charCompo);
+        characters.push(<CharacterWitch {...componentAttr}></CharacterWitch>);
       }
     });
 

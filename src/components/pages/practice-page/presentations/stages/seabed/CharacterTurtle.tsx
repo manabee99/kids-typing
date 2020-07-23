@@ -2,6 +2,7 @@ import React from 'react';
 
 import '../../../../../common/KidsTypingCommon.css';
 import '../../../PracticePageForm.css';
+import { Character } from '../common/Character';
 
 // --------------------------------------------
 // タイプ練習の文字（亀）Component
@@ -31,11 +32,10 @@ export const CharacterTurtle: React.FC<CharacterTurtleProps> = (props) => {
   return (
     <div
       key={'turtle' + props.componentId}
-      // ゼロとＯを区別するために数字は文字色を変更するクラスを追加する
-      className={'kt-flex-vertical-center kt-font-white character-base character-turtle ' + ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')}
+      className={'kt-flex-vertical-center kt-font-white character-base character-turtle'}
       style={{ top: Math.round(props.top), left: Math.round(props.left) }}
     >
-      {props.character}
+      <Character left={30} character={props.character}></Character>
     </div>
   );
 };

@@ -19,32 +19,22 @@ type PracticeStageSunflowerProps = OwnProps;
 export const PracticeStageSunflower: React.FC<PracticeStageSunflowerProps> = (props) => {
   const characters: any = [];
   props.characterStateList.forEach((c, idx) => {
+    // キャラクターコンポーネントに設定する属性を構築
+    const componentAttr = {
+      isHead: idx === 0,
+      componentId: c.componentId,
+      character: c.character,
+      top: c.top,
+      left: c.left,
+      charcterState: c.characterState,
+    };
+
     if (c.practiceCharacterType === 'dragonfly') {
       // 入力文字の種別が「とんぼ」の場合
-      const charCompo = (
-        <CharacterDragonfly
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterDragonfly>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterDragonfly {...componentAttr}></CharacterDragonfly>);
     } else if (c.practiceCharacterType === 'ladybird') {
       // 入力文字の種別が「てんとうむし」の場合
-      const charCompo = (
-        <CharacterLadybird
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterLadybird>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterLadybird {...componentAttr}></CharacterLadybird>);
     }
   });
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 import '../../../../../common/KidsTypingCommon.css';
 import '../../../PracticePageForm.css';
+import { Character } from '../common/Character';
 
 // --------------------------------------------
 // タイプ練習の文字（金魚）Component
@@ -31,11 +32,10 @@ export const CharacterGoldfish: React.FC<CharacterGoldfishProps> = (props) => {
   return (
     <div
       key={'goldfish' + props.componentId}
-      // ゼロとＯを区別するために数字は文字色を変更するクラスを追加する
-      className={'kt-flex-vertical-center kt-font-white character-base character-goldfish ' + ('0123456789'.indexOf(props.character) !== -1 ? 'character-number' : '')}
+      className={'kt-flex-vertical-center kt-font-white character-base character-goldfish'}
       style={{ top: Math.round(props.top), left: Math.round(props.left) }}
     >
-      {props.character}
+      <Character character={props.character}></Character>
     </div>
   );
 };

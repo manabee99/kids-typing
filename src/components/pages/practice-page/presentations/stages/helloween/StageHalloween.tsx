@@ -22,71 +22,31 @@ type PracticeStageHalloweenProps = OwnProps;
 export const PracticeStageHalloween: React.FC<PracticeStageHalloweenProps> = (props) => {
   const characters: any = [];
   props.characterStateList.forEach((c, idx) => {
+    // キャラクターコンポーネントに設定する属性を構築
+    const componentAttr = {
+      isHead: idx === 0,
+      componentId: c.componentId,
+      character: c.character,
+      top: c.top,
+      left: c.left,
+      charcterState: c.characterState,
+    };
+
     if (c.practiceCharacterType === 'bat') {
       // 入力文字の種別が「コウモリ」の場合
-      const charCompo = (
-        <CharacterBat
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterBat>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterBat {...componentAttr}></CharacterBat>);
     } else if (c.practiceCharacterType === 'blackcat') {
       // 入力文字の種別が「黒猫」の場合
-      const charCompo = (
-        <CharacterBlackCat
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterBlackCat>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterBlackCat {...componentAttr}></CharacterBlackCat>);
     } else if (c.practiceCharacterType === 'ghost') {
       // 入力文字の種別が「お化け」の場合
-      const charCompo = (
-        <CharacterGhost
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterGhost>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterGhost {...componentAttr}></CharacterGhost>);
     } else if (c.practiceCharacterType === 'pumpkin') {
       // 入力文字の種別が「かぼちゃ」の場合
-      const charCompo = (
-        <CharacterPumpkin
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterPumpkin>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterPumpkin {...componentAttr}></CharacterPumpkin>);
     } else if (c.practiceCharacterType === 'witch') {
       // 入力文字の種別が「魔女」の場合
-      const charCompo = (
-        <CharacterWitch
-          isHead={idx === 0}
-          componentId={c.componentId}
-          character={c.character}
-          top={c.top}
-          left={c.left}
-          charcterState={c.characterState}
-        ></CharacterWitch>
-      );
-      characters.push(charCompo);
+      characters.push(<CharacterWitch {...componentAttr}></CharacterWitch>);
     }
   });
 

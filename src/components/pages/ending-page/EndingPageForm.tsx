@@ -206,30 +206,30 @@ export class EndingPageForm extends React.Component<Props> {
       this.props.soundMute();
     }
 
-    // １０秒後にキャラクターを登場させる
+    // ５秒後にキャラクターを登場させる
     setTimeout(
       () => {
         this.props.startEnding();
       },
-      10 * 1000,
+      5 * 1000,
       this
     );
 
-    // １１０秒後にタイトル画面をフェードアウト
+    // ６０秒後にタイトル画面をフェードアウト
     setTimeout(
       () => {
         this.props.fadeOutEnding();
       },
-      110 * 1000,
+      60 * 1000,
       this
     );
 
-    // １２０秒後にタイトル画面に戻る
+    // ７０秒後にタイトル画面に戻る
     setTimeout(
       () => {
         this.props.endEnding();
       },
-      120 * 1000,
+      70 * 1000,
       this
     );
   }

@@ -1,0 +1,66 @@
+/* ------------------------------------------- */
+/* エフェクトレイヤーの定義                      */
+/* ------------------------------------------- */
+
+/* 練習画面の上に重ねて表示するエフェクトレイヤー */
+.effect-layer-frame {
+  position: absolute;
+  z-index: 20;
+  top: 0px;
+  left: 10px;
+  bottom: 0px;
+  right: 10px;
+  overflow: hidden;
+}
+
+/* ------------------------------------------- */
+/* 正解エフェクト                               */
+/* ------------------------------------------- */
+.ef-correct {
+  position: absolute;
+  border-radius: 50%;
+  border: var(--kt-ef-correct-animation-border);
+  opacity: 0.0;
+  animation: 0.4s ease-out animation-ef-correct;
+}
+@keyframes animation-ef-correct {
+  0% {
+    transform: scale(0.05) rotate(0deg);
+    opacity: 1.0;
+  }
+  100% {
+    transform: scale(1.0) rotate(180deg);
+    opacity: 0.2;
+  }
+}
+
+/* ------------------------------------------- */
+/* 失敗エフェクト                               */
+/* ------------------------------------------- */
+.ef-miss {
+  position: absolute;
+  border: var(--kt-ef-miss-animation-border);
+  border-radius: 50%;
+  opacity: 0.0;
+  animation: 0.4s ease-out animation-ef-miss;
+}
+@keyframes animation-ef-miss {
+  0%{
+    transform: scale(1.0) rotate(0deg);
+    opacity: 1.0;
+  }
+  100% {
+    transform: scale(0.05)  rotate(180deg);
+    opacity: 0.1;
+  }
+}
+
+/* ------------------------------------------- */
+/* 「文字」のカーソルエフェクト                  */
+/* ------------------------------------------- */
+.ef-input-cursor {
+  border: var(--kt-ef-input-cursor-border);
+  position: absolute;
+  width: 150px;
+  height: 150px;
+}

@@ -1,0 +1,145 @@
+/* トップページの背景画像（透過させるために別フレームとしている） */
+.title-page-background {
+  display: flex;
+  background-color: var(--kt-page-background);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+/* トップページの背景色（title-page-backgroundと合わせて利用）*/
+.title-page-outer-frame {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+/* トップページの枠 */
+.title-page-inner-frame {
+  position: absolute;
+  width: 1080px;
+  height: 768px;
+  top: 10px;
+  background: center/120% no-repeat url('../../../images/background-title.png');
+  overflow: hidden;
+}
+
+/* タイトルロゴ */
+.title-logo {
+  font-size: 100px;
+  color: var(--kt-title-color);
+  transform: translateY(100px);
+  animation: 4s ease-in-out infinite animation-title-logo;
+}
+
+@keyframes animation-title-logo {
+  0% {
+    transform: translate(0px, 100px);
+  }
+  33% {
+    transform: translate(0px, -30px);
+  }
+  66% {
+    transform: translate(0px, 300px);
+  }
+  100% {
+    transform: translate(0px, 100px);
+  }
+}
+
+/* 練習開始ボタン */
+.practice-start-button-frame {
+  position: absolute;
+  bottom: 100px;
+  width: 200px;
+  height: 85px;
+  border-radius: 25px;
+  border: var(--kt-button-border);
+  background-image: var(--kt-button-bg-image);
+  transition: all 0.2s;
+}
+.practice-start-button {
+  font-size: 50px;
+  color: var(--kt-button-color);
+  text-shadow: var(--kt-button-text-shadow);
+  -webkit-text-stroke: var(--kt-button-stroke);
+}
+.practice-start-button-frame:active {
+  transform: var(--kt-button-down);
+}
+.practice-start-button-frame:hover {
+  border: var(--kt-button-border-hover);
+}
+
+/* リセットボタン */
+.practice-level-reset-button-frame {
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  right: 40px;
+  bottom: 110px;
+  border-radius: 25px;
+  border: var(--kt-button-border);
+  background-image: var(--kt-button-bg-image);
+  transition: all 0.2s;
+}
+.practice-level-reset-button {
+  font-size: 25px;
+  color: var(--kt-button-color);
+  text-shadow: var(--kt-button-text-shadow);
+  -webkit-text-stroke: var(--kt-button-stroke);
+}
+.practice-level-reset-button-frame:active {
+  transform: var(--kt-button-down);
+}
+.practice-level-reset-button-frame:hover {
+  border: var(--kt-button-border-hover);
+}
+
+/* 練習レベルの枠 */
+.practice-level-label-frame {
+  position: absolute;
+  width: 400px;
+  height: 50px;
+  bottom: 280px;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 練習レベルの文字 */
+.practice-level-label {
+  font-size: 25px;
+}
+
+/* ミュートボタン */
+.mute-button-base {
+  position: absolute;
+  bottom: 90px;
+  left: 70px;
+  width: 128px;
+  height: 128px;
+  border: var(--kt-button-border);
+  border-radius: 50%;
+  transition: 0.1s;
+}
+.mute-button {
+  background-image: url('../../../images/icon-sound-mute.png');
+}
+.mute-button:active {
+  transform: var(--kt-button-down);
+}
+.mute-button:hover {
+  border: var(--kt-button-border-hover);
+}
+
+/* ミュート解除ボタン */
+.unmute-button {
+  background-image: url('../../../images/icon-sound-unmute.png');
+}
+.unmute-button:active {
+  transform: var(--kt-button-down);
+}
+.unmute-button:hover {
+  border: var(--kt-button-border-hover);
+}

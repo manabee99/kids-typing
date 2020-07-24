@@ -32,17 +32,11 @@ export const Keyboard: React.FC<KeyboardProps> = (props) => {
   Array.from(keyOrderLine).forEach((order) => {
     var keys: any = [];
     Array.from(order).forEach((c) => {
-      keys.push(
-      <Keycap 
-        keycapCharacter={c}
-        enabledKey={props.enabledKeys.indexOf(c) !== -1}
-        keyDown={props.downKeys.indexOf(c) !== -1}>
-      </Keycap>);
+      keys.push(<Keycap keycapCharacter={c} enabledKey={props.enabledKeys.indexOf(c) !== -1} keyDown={props.downKeys.indexOf(c) !== -1}></Keycap>);
     });
     allKeys.push(keys);
   });
 
-  // CSSを定義（クラスの定義が長くなってJSXの可読性が悪くなるので一旦変数に格納）
   const cls = {
     frame: 'kt-flex-vertical-center keyboard-frame',
     firstRow: 'kt-flex-horizontal-left keyboard-first-row-frame',

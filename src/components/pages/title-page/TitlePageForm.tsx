@@ -41,6 +41,9 @@ interface OwnProps {
   // 状態更新関数
   // --------------------------------------------
 
+  // 練習開始
+  startPractice: Function;
+
   // ダイアログを開く
   openDialog: Function;
 
@@ -64,6 +67,9 @@ interface OwnProps {
 
   // ミュート(BGM、効果音の)
   soundMute: Function;
+
+  // ミュートのON、OFF切り替え
+  toggleSoundMute: Function;
 }
 
 // パラメータの型定義
@@ -109,7 +115,7 @@ export class TitlePageForm extends React.Component<Props> {
             ></PracticeLevelResetButton>
 
             {/* ミュートボタン */}
-            <MuteButton soundMute={this.props.soundMute} soundMuting={this.props.soundMuting}></MuteButton>
+            <MuteButton soundMute={this.props.toggleSoundMute} soundMuting={this.props.soundMuting}></MuteButton>
           </div>
         </div>
 
@@ -130,7 +136,7 @@ export class TitlePageForm extends React.Component<Props> {
     // 練習レベルをロードする
     this.props.loadPracticeLevel();
     // ミュート状態を設定する
-    if (this.props.match.params.soundMuting === "false") {
+    if ((typeof this.props.match.params.soundMuting) === 'undefined' || this.props.match.params.soundMuting) {
       this.props.soundMute();
     }
   }
@@ -151,7 +157,7 @@ export class TitlePageForm extends React.Component<Props> {
     setTimeout(
       () => {
         this.props.stoppedSoundEffect();
-        this.props.history.replace('/kids-typing/practice');
+        this.props.startPractice();
       },
       1000,
       this

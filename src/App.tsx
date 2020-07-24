@@ -8,18 +8,23 @@ import EndingPageContainer from './containers/EndingPageContainer';
 const App: React.FC = (props) => {
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
+
+          {/* kids-typingの入り口 */}
+          <Route path='/' exact>
+            <Redirect to='/title/true/'></Redirect>
+          </Route>
+
           {/* タイトルページ（練習後に戻った時）*/}
-          <Route path='/kids-typing/title/:soundMuting' component={TitlePageContainer}></Route>
+          <Route path='/title/:soundMuting' exact component={TitlePageContainer}></Route>
 
           {/* 練習ページ */}
-          <Route path='/kids-typing/practice' component={PracticePageContainer}></Route>
+          <Route path='/practice/:soundMuting' exact component={PracticePageContainer}></Route>
 
           {/* エンディングページ */}
-          <Route path='/kids-typing/ending/:soundMuting' component={EndingPageContainer}></Route>
+          <Route path='/ending/:soundMuting' exact component={EndingPageContainer}></Route>
 
-          <Redirect to='/kids-typing/title/false' />
         </Switch>
       </BrowserRouter>
     </React.Fragment>

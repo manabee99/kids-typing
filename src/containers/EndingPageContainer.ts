@@ -105,7 +105,7 @@ function endEnding(): void {
   clearInterval(intervalHandle);
 
   // タイトル画面に遷移する
-  window.location.replace('/kids-typing/title/' + (store.getState().soundState.soundMuting ? 'true' : 'false'));
+  window.location.replace(process.env.PUBLIC_URL + '/title/' + (store.getState().soundState.soundMuting ? 'true' : 'false'));
 }
 
 /**

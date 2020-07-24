@@ -13,7 +13,6 @@ interface OwnProps {
 
 type MissCounterProps = OwnProps;
 export const MissCounter: React.FC<MissCounterProps> = (props) => {
-  // CSSを定義（クラスの定義が長くなってJSXの可読性が悪くなるので一旦変数に格納）
   const cls = {
     frame: 'miss-counter-frame',
     title: 'kt-font-bold-stroke miss-counter-title',

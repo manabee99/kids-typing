@@ -12,7 +12,6 @@ interface OwnProps {
 
 type PracticeStartAnimationProps = OwnProps;
 export const PracticeStartAnimation: React.FC<PracticeStartAnimationProps> = (props) => {
-  // CSSを定義（クラスの定義が長くなってJSXの可読性が悪くなるので一旦変数に格納）
   const cls = {
     frame: 'kt-box-fit parctice-start-animation-layer-frame',
     animation01: 'kt-box-fit kt-flex-vertical-center kt-font-bold-stroke practice-start-animation-base practice-start-animation-1',

@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/kids-typing/static/css/main.3659710d.chunk.css",
-    "main.js": "/kids-typing/static/js/main.df447179.chunk.js",
-    "main.js.map": "/kids-typing/static/js/main.df447179.chunk.js.map",
+    "main.js": "/kids-typing/static/js/main.c4dd5dae.chunk.js",
+    "main.js.map": "/kids-typing/static/js/main.c4dd5dae.chunk.js.map",
     "runtime-main.js": "/kids-typing/static/js/runtime-main.2efd3920.js",
     "runtime-main.js.map": "/kids-typing/static/js/runtime-main.2efd3920.js.map",
     "static/js/2.42f8b05d.chunk.js": "/kids-typing/static/js/2.42f8b05d.chunk.js",
     "static/js/2.42f8b05d.chunk.js.map": "/kids-typing/static/js/2.42f8b05d.chunk.js.map",
     "index.html": "/kids-typing/index.html",
-    "precache-manifest.c4030cbb47a77df9e94dc7a9d94f8ee5.js": "/kids-typing/precache-manifest.c4030cbb47a77df9e94dc7a9d94f8ee5.js",
+    "precache-manifest.f18cd58f760d545c0650a24a89e3cd35.js": "/kids-typing/precache-manifest.f18cd58f760d545c0650a24a89e3cd35.js",
     "service-worker.js": "/kids-typing/service-worker.js",
     "static/css/main.3659710d.chunk.css.map": "/kids-typing/static/css/main.3659710d.chunk.css.map",
     "static/js/2.42f8b05d.chunk.js.LICENSE.txt": "/kids-typing/static/js/2.42f8b05d.chunk.js.LICENSE.txt",
@@ -40,6 +40,6 @@
     "static/js/runtime-main.2efd3920.js",
     "static/js/2.42f8b05d.chunk.js",
     "static/css/main.3659710d.chunk.css",
-    "static/js/main.df447179.chunk.js"
+    "static/js/main.c4dd5dae.chunk.js"
   ]
 }

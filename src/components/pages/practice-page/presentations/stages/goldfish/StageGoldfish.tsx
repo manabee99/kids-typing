@@ -20,7 +20,6 @@ type PracticeStageGoldfishProps = OwnProps;
 export const PracticeStageGoldfish: React.FC<PracticeStageGoldfishProps> = (props) => {
   const characters: any = [];
   props.characterStateList.forEach((c, idx) => {
-    // キャラクターコンポーネントに設定する属性を構築
     const componentAttr = {
       isHead: idx === 0,
       componentId: c.componentId,
@@ -31,13 +30,10 @@ export const PracticeStageGoldfish: React.FC<PracticeStageGoldfishProps> = (prop
     };
 
     if (c.practiceCharacterType === 'goldfish') {
-      // 入力文字の種別が「金魚」の場合
       characters.push(<CharacterGoldfish {...componentAttr}></CharacterGoldfish>);
     } else if (c.practiceCharacterType === 'blackfish') {
-      // 入力文字の種別が「出目金」の場合
       characters.push(<CharacterBlackfish {...componentAttr}></CharacterBlackfish>);
     } else if (c.practiceCharacterType === 'catfish') {
-      // 入力文字の種別が「なまず」の場合
       characters.push(<CharacterCatfish {...componentAttr}></CharacterCatfish>);
     }
   });

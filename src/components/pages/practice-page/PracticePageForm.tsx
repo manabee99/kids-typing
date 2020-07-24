@@ -21,6 +21,7 @@ import { PracticeStageSunflower } from './presentations/stages/sunflower/StageSu
 import { PracticeStageGoldfish } from './presentations/stages/goldfish/StageGoldfish';
 import { PracticeStageSeabed } from './presentations/stages/seabed/StageSeabed';
 import { PracticeStageHalloween } from './presentations/stages/helloween/StageHalloween';
+import { RouteComponentProps } from 'react-router';
 
 // --------------------------------------------
 // 練習ページコンテナから受け取るパラメータの定義
@@ -105,7 +106,7 @@ interface OwnProps {
 }
 
 // パラメータの型定義
-type Props = OwnProps;
+type Props = OwnProps & RouteComponentProps<{ soundMuting: string }>;
 
 // --------------------------------------------
 // 練習ページのForm Component
@@ -131,7 +132,6 @@ export class PracticePageForm extends React.Component<Props> {
   // 練習ページrender
   // --------------------------------------------
   render() {
-    // CSSを定義（クラスの定義が長くなってJSXの可読性が悪くなるので一旦変数に格納）
     const cls = {
       pageBackground: 'kt-box-fit practice-page-background',
       outerFrame: 'kt-box-fit practice-page-outer-frame',
@@ -181,7 +181,7 @@ export class PracticePageForm extends React.Component<Props> {
               <PracticeStartAnimation animationEnd={this.onAnimationEnd.bind(this)}></PracticeStartAnimation>
 
               {/* 練習終了アニメーション*/}
-              {this.props.remainingTime === 0? (
+              {this.props.remainingTime === 0 ? (
                 <PracticeEndAnimation
                   levelUp={this.props.missCounter < 3 ? true : false}
                   animationEnd={this.props.endAnimationEnd}

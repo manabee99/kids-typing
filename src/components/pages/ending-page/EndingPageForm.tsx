@@ -201,7 +201,7 @@ export class EndingPageForm extends React.Component<Props> {
    */
   componentDidMount() {
     // ミュート状態を設定する
-    if (this.props.match.params.soundMuting === 'false') {
+    if (!this.props.match.params.soundMuting) {
       this.props.soundMute();
     }
 

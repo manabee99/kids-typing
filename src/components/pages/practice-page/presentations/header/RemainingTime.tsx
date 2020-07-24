@@ -13,7 +13,6 @@ interface OwnProps {
 
 type RemainingTimeProps = OwnProps;
 export const RemainingTime: React.FC<RemainingTimeProps> = (props) => {
-  // CSSを定義（クラスの定義が長くなってJSXの可読性が悪くなるので一旦変数に格納）
   const cls = {
     frame: 'remaining-time-frame',
     valueFadein: 'kt-font-bold-stroke remaining-time-base remaining-time-fadein',
@@ -21,7 +20,6 @@ export const RemainingTime: React.FC<RemainingTimeProps> = (props) => {
   };
 
   return (
-    // 値の枠（keyにカウンター値を設定することでCSSアニメーションを設定したエレメントの再描画を抑止している）
     <div className={cls.frame} key={'remaining-time' + props.remainingTime}>
       {/* カウンター値（現在の値） */}
       <div className={cls.valueFadein}>{props.remainingTime}</div>

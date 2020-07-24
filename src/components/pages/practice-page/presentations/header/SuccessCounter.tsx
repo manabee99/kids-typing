@@ -13,7 +13,6 @@ interface OwnProps {
 
 type SuccessCounterProps = OwnProps;
 export const SuccessCounter: React.FC<SuccessCounterProps> = (props) => {
-  // CSSを定義（クラスの定義が長くなってJSXの可読性が悪くなるので一旦変数に格納）
   const cls = {
     frame: 'success-counter-frame',
     title: 'kt-font-bold-stroke success-counter-title',

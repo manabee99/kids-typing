@@ -8,7 +8,6 @@ import { KeyboardActions } from '../store/actions/KeyboardActions';
 import { SoundActions } from '../store/actions/SoundActions';
 import { HeaderActions } from '../store/actions/HeaderActions';
 import { SoundResources } from '../SoundResources';
-import { withRouter } from 'react-router';
 import store, { AppState } from '../store/KidsTypingStore';
 import { MAX_PRACTICE_LEVEL } from '../store/reducers/TitleReducer';
 
@@ -107,7 +106,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PracticePageForm));
+export default connect(mapStateToProps, mapDispatchToProps)(PracticePageForm);
 
 /**
  * ステージ初期化
@@ -209,12 +208,12 @@ function endPractice(): void {
 
   // レベル２１になった場合はエンディングページに遷移する
   if (store.getState().titleState.practiceCompleted && previousLevel === (MAX_PRACTICE_LEVEL - 1)) {
-    window.location.replace('/kids-typing/ending/' + (store.getState().soundState.soundMuting ? 'true' : 'false'));
+    window.location.replace(process.env.PUBLIC_URL + '/ending/' + (store.getState().soundState.soundMuting ? 'true' : 'false'));
     return;
   }
 
   // タイトル画面に遷移する
-  window.location.replace('/kids-typing/title/' + (store.getState().soundState.soundMuting ? 'true' : 'false'));
+  window.location.replace(process.env.PUBLIC_URL +'/title/' + (store.getState().soundState.soundMuting ? 'true' : 'false'));
 }
 
 /**

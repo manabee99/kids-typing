@@ -4,7 +4,6 @@ import { SoundResources } from '../SoundResources';
 import { TitlePageForm } from '../components/pages/title-page/TitlePageForm';
 import { TitleActions } from '../store/actions/TitleAction';
 import { SoundActions } from '../store/actions/SoundActions';
-import { SoundState } from '../store/reducers/SoundReducer';
 import store, { AppState } from '../store/KidsTypingStore';
 
 const mapStateToProps = (appState: AppState) => {
@@ -34,6 +33,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     // 練習レベルリセット（レベル１に戻す）
     resetPracticeLevel: () => resetPracticeLevel(),
 
+    // 練習開始
+    startPractice: () => startPractice(),
+
     // BGM開始
     playingBgm: (bgmUrl: string) => dispatch(SoundActions.PLAYING_BGM({ bgmUrl: bgmUrl })),
 
@@ -46,8 +48,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     // 効果音停止
     stoppedSoundEffect: () => dispatch(SoundActions.STOPPED_SOUND_EFFECT()),
 
+    // ミュート
+    soundMute: () => soundMute(),
+
     // ミュート（ON、OFFを繰り返す）
-    soundMute: () => ((store.getState().soundState as SoundState).soundMuting ? soundUnmute() : soundMute()),
+    toggleSoundMute: () => store.getState().soundState.soundMuting ? soundUnmute() : soundMute(),
 
     // ダイアログを開く
     openDialog: () => dispatch(TitleActions.OPEN_DIALOG()),
@@ -58,6 +63,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TitlePageForm);
+
+function startPractice() {
+  // 練習画面に遷移する
+  window.location.replace(process.env.PUBLIC_URL + '/practice/' + (store.getState().soundState.soundMuting ? 'true' : 'false'));
+}
 
 /**
  * 練習レベルリセット
